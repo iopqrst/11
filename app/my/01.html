@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+
+	<body>
+		<div ng-controller="WelcomeController" ng-cloak>
+			{{greeting}}
+		</div>
+
+		<script src="../bower_components/angular/angular.js"></script>
+		<script>
+			var app = angular.module('demo', [])
+				.controller('WelcomeController', function($scope) {
+					$scope.greeting = angular.uppercase('Welcome monkey!');
+				});
+			angular.bootstrap(document, ['demo']);
+			
+			console.info(angular.lowercase("HAHAH, LOWERCASE"));
+			console.info(angular.uppercase("hahaha, lowercase"));
+		</script>
+	</body>
+
+</html>
