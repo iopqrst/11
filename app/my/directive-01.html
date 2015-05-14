@@ -1,0 +1,36 @@
+<!doctype html>
+<html ng-app="app">
+
+	<body>
+		<hi></hi>
+		<hr />
+		<hello>
+			<br/>
+			<span>原始的内容，</span>
+			<br/>
+			<span>还会在这里。</span>
+		</hello>
+		<hello>
+		</hello>
+		<script src="../bower_components/angular/angular.js"></script>
+		<script>
+			var appModule = angular.module('app', []);
+			appModule.directive('hi', function() {
+				return {
+					restrict: 'E',
+					template: '<div>Hi fucker</div>',
+					replace: true
+				};
+			});
+			appModule.directive('hello', function() {
+				return {
+					restrict: 'E',
+					template: '<div>Hi there <span ng-transclude></span></div>',
+					transclude: true,
+					replace: true //是否要替换掉原有标签，比如hello
+				};
+			});
+		</script>
+	</body>
+
+</html>
