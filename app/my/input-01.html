@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
 
 	<head>
 		<meta charset="utf-8">
@@ -7,7 +7,7 @@
 	</head>
 
 	<body>
-		<div ng-controller="Ctrl">
+		<div ng-controller="MyCtrl">
 			<form name="myForm">
 				User name:
 				<input type="text" name="userName" ng-model="user.name" required>
@@ -38,15 +38,19 @@
 			<tt>myForm.$error.maxlength = {{!!myForm.$error.maxlength}}</tt>
 			<br>
 		</div>
-		
+
 		<script src="../bower_components/angular/angular.js"></script>
 		<script>
-			function Ctrl($scope) {
-				$scope.user = {
-					name: 'guest',
-					last: 'visitor'
-				};
-			}
+			var appModule = angular.module('app', []);
+
+			appModule.controller('MyCtrl', ['$scope',
+				function($scope) {
+					$scope.user = {
+						name: 'guest',
+						last: 'visitor'
+					};
+				}
+			]);
 		</script>
 	</body>
 
