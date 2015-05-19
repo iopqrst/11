@@ -11,11 +11,37 @@ phonecatControllers.controller('PhoneListCtrl', ['$scope', 'Phone',
 	}
 ]);
 
+phonecatControllers.controller('MyPhoneListCtrl', ['$scope', 'Phone',
+	function($scope, Phone) {
+		Phone.query({phoneId: 'phones-list.json'},function(_phones){
+			console.info('phones size = ' + _phones.length);
+			$scope.phones = _phones;
+		});
+		$scope.orderProp = 'age';
+	}
+]);
+
 phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams', 'Phone',
 	function($scope, $routeParams, Phone) {
 		$scope.phone = Phone.get({
 			phoneId: $routeParams.phoneId
 		}, function(phone) {
+			console.info("phone ---> " + JSON.stringify(phone));
+			$scope.mainImageUrl = phone.images[0];
+		});
+
+		$scope.setImage = function(imageUrl) {
+			$scope.mainImageUrl = imageUrl;
+		}
+	}
+]);
+
+phonecatControllers.controller('MyPhoneDetailCtrl', ['$scope', '$routeParams', 'Phone',
+	function($scope, $routeParams, Phone) {
+		$scope.phone = Phone.get({
+			phoneId: $routeParams.phoneId
+		}, function(phone) {
+			console.info("--->" + phone.stringify());
 			$scope.mainImageUrl = phone.images[0];
 		});
 
