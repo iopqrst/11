@@ -41,7 +41,7 @@ phonecatControllers.controller('MyPhoneDetailCtrl', ['$scope', '$routeParams', '
 		$scope.phone = Phone.get({
 			phoneId: $routeParams.phoneId
 		}, function(phone) {
-			console.info("--->" + phone.stringify());
+			console.info("phone ---> " + JSON.stringify(phone));
 			$scope.mainImageUrl = phone.images[0];
 		});
 
