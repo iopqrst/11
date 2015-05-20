@@ -1,0 +1,45 @@
+<!doctype html>
+<html ng-app="textInputExample">
+
+	<head>
+		<title>directive</title>
+		<style>
+		</style>
+	</head>
+
+	<body>
+
+		<label>Enter name:
+			<input type="text" ng-model="name">
+		</label>
+		<br> Hello <span ng-bind="name"></span>!
+
+		<br />
+
+		<label>Enter name:
+			<input type="text" ng-model="name2">
+		</label>
+		<br> Hello <span ng-bind-template="name2"></span>!
+
+		<br />
+
+		<label>Enter name:
+			<input type="text" ng-model="name3">
+		</label>
+		<br> Hello <span ng-bind-template="{{name3}}"></span>!
+
+		<script src="../bower_components/angular/angular.js"></script>
+		<script>
+			angular.module('textInputExample', [])
+				.controller('ExampleController', ['$scope',
+					function($scope) {
+						$scope.example = {
+							mobile: '',
+							mobileReg: /^1[0-9]{10}$/
+						};
+					}
+				]);
+		</script>
+	</body>
+
+</html>

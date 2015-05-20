@@ -1,0 +1,44 @@
+<!doctype html>
+<html ng-app="myapp">
+
+	<head>
+		<title>directive</title>
+		<style>
+			input.ng-invalid.ng-pristine {
+				background-color: red;
+			}
+			
+			input.ng-invalid.ng-dirty {
+				background-color: yellow;
+			}
+		</style>
+	</head>
+
+	<body ng-controller="FormController">
+		<pre>
+			ng-valid: 验证通过
+			ng-invalid: 验证没有通过
+			ng-pristine: 用户没有输入任何东西
+			ng-dirty: 用户输入了东西， 不管最终值有木有改变。 例如开始里面是空的， 填写了ab， 之后又吧ab删除了， 这是也是dirty的.
+		</pre>
+		<form name="myForm" ng-submit="save()">
+			<input type="text" name="personName" ng-model="person.name" required>
+			<input type="text" name="age" ng-model="person.age" required>
+			<input type="text" name="mobile" ng-model="person.mobile" required>
+			<input type="submit" value="保存" />
+		</form>
+
+		<script src="../bower_components/angular/angular.js"></script>
+		<script>
+			var appModule = angular.module('myapp', []);
+			appModule.controller('FormController', ['$scope',
+				function($scope) {
+					$scope.save = function() {
+						alert('here!!!');
+					};
+				}
+			]);
+		</script>
+	</body>
+
+</html>

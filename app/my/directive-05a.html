@@ -7,24 +7,15 @@
 
 	<body ng-controller="MyCtrl">
 
-		s:
-		<input type="text" ng-model="s" />
-		<br/> 
-		name:
-		<input type="text" ng-model="name" />
-		
-		<input type="button" ng-click="getinfo()" value="getInfo"/>
+		<a href="" ng-click="showMsg()"> link </a>
 
 		<script src="../bower_components/angular/angular.js"></script>
 		<script>
 			var appModule = angular.module('myapp', []);
 			appModule.controller('MyCtrl', ['$scope',
 				function($scope) {
-					$scope.s = 'hello';
-					$scope.name = 'world';
-					
-					$scope.getinfo = function() {
-						console.info($scope.s + ',' + $scope.name);
+					$scope.showMsg = function() {
+						alert('show alter info');
 					}
 				}
 			]);

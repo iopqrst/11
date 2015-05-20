@@ -1,0 +1,65 @@
+<!doctype html>
+<html ng-app="myapp">
+
+	<head>
+		<title>directive</title>
+		<style>
+		</style>
+	</head>
+
+	<body>
+
+		<form name="myForm" ng-controller="ExampleController">
+			<label>Value1:
+				<input type="checkbox" ng-model="checkboxModel.value1">
+			</label>
+			<br/>
+			<label>Value2:
+				<input type="checkbox" ng-model="checkboxModel.value2" ng-true-value="'YES'" ng-false-value="'NO'">
+			</label>
+			<br/>
+			<tt>value1 = <span ng-bind-template="{{checkboxModel.value1}}"></span></tt>
+			<br/>
+			<tt>value2 = {{checkboxModel.value2}}</tt>
+			<br/>
+
+			<hr />
+
+			<label>
+				<input type="radio" ng-model="color.name" value="red"> Red
+			</label>
+			<br/>
+			<label>
+				<input type="radio" ng-model="color.name" ng-value="specialValue"> Green
+			</label>
+			<br/>
+			<label>
+				<input type="radio" ng-model="color.name" value="blue"> Blue
+			</label>
+			<br/>
+			<tt>color = {{color.name | json}}</tt>
+			<br/>
+		</form>
+
+		<script src="../bower_components/angular/angular.js"></script>
+		<script>
+			angular.module('myapp', [])
+				.controller('ExampleController', ['$scope',
+					function($scope) {
+						$scope.checkboxModel = {
+							value1: true,
+							value2: 'NO'
+						};
+						$scope.color = {
+							name: 'blue'
+						};
+						$scope.specialValue = {
+							"id": "12345",
+							"value": "green"
+						};
+					}
+				]);
+		</script>
+	</body>
+
+</html>
