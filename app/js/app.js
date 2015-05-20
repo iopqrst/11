@@ -8,11 +8,11 @@ phonecatApp.config(['$routeProvider',
 		$routeProvider.
 		when('/phones', {
 			templateUrl: 'partials/phone-list.html',
-			controller: 'PhoneListCtrl'
+			controller: 'MyPhoneListCtrl'
 		}).
 		when('/phones/:phoneId', {
 			templateUrl: 'partials/phone-detail.html',
-			controller: 'PhoneDetailCtrl'
+			controller: 'MyPhoneDetailCtrl'
 		}).
 		otherwise({
 			redirectTo: '/phones'

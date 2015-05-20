@@ -11,9 +11,9 @@ phonecatControllers.controller('PhoneListCtrl', ['$scope', 'Phone',
 	}
 ]);
 
-phonecatControllers.controller('MyPhoneListCtrl', ['$scope', 'Phone',
-	function($scope, Phone) {
-		Phone.query({phoneId: 'phones-list.json'},function(_phones){
+phonecatControllers.controller('MyPhoneListCtrl', ['$scope', 'MyPhone',
+	function($scope, MyPhone) {
+		MyPhone.query({phoneId: 'phones-list.json'},function(_phones){
 			console.info('phones size = ' + _phones.length);
 			$scope.phones = _phones;
 		});
@@ -36,10 +36,10 @@ phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams', 'Ph
 	}
 ]);
 
-phonecatControllers.controller('MyPhoneDetailCtrl', ['$scope', '$routeParams', 'Phone',
-	function($scope, $routeParams, Phone) {
-		$scope.phone = Phone.get({
-			phoneId: $routeParams.phoneId
+phonecatControllers.controller('MyPhoneDetailCtrl', ['$scope', '$routeParams', 'MyPhone',
+	function($scope, $routeParams, MyPhone) {
+		$scope.phone = MyPhone.get({
+			phoneId: $routeParams.phoneId + '.json'
 		}, function(phone) {
 			console.info("phone ---> " + JSON.stringify(phone));
 			$scope.mainImageUrl = phone.images[0];
