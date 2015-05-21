@@ -1,0 +1,71 @@
+<!doctype html>
+<html ng-app="controllerAsExample">
+
+	<head>
+		<title>directive</title>
+		<style type="text/css">
+		</style>
+		<script src="../bower_components/angular/angular.js"></script>
+		<script>
+			angular.module('controllerAsExample', [])
+				.controller('SettingsController1', SettingsController1);
+
+			function SettingsController1() {
+				this.name = "John Smith";
+				this.contacts = [{
+					type: 'phone',
+					value: '408 555 1212'
+				}, {
+					type: 'email',
+					value: 'john.smith@example.org'
+				}];
+			}
+			
+			SettingsController1.prototype.greet = function() {
+				alert(this.name);
+			};
+			
+			SettingsController1.prototype.addContact = function() {
+				this.contacts.push({
+					type: 'email',
+					value: 'yourname@example.org'
+				});
+			};
+			
+			SettingsController1.prototype.removeContact = function(contactToRemove) {
+				var index = this.contacts.indexOf(contactToRemove);
+				this.contacts.splice(index, 1);
+			};
+			
+			SettingsController1.prototype.clearContact = function(contact) {
+				contact.type = 'phone';
+				contact.value = '';
+			};
+		</script>
+	</head>
+
+	<body>
+		<div id="ctrl-as-exmpl" ng-controller="SettingsController1 as sc">
+			<label>Name:
+				<input type="text" ng-model="sc.name" />
+			</label>
+			<button ng-click="sc.greet()">greet</button>
+			<br/> Contact:
+			<ul>
+				<li ng-repeat="contact in sc.contacts">
+					<select ng-model="contact.type" aria-label="Contact method" id="select_{{$index}}">
+						<option>phone</option>
+						<option>email</option>
+					</select>
+					<input type="text" ng-model="contact.value" aria-labelledby="select_{{$index}}" />
+					<button ng-click="sc.clearContact(contact)">clear</button>
+					<button ng-click="sc.removeContact(contact)" aria-label="Remove">X</button>
+				</li>
+				<li>
+					<button ng-click="sc.addContact()">add</button>
+				</li>
+			</ul>
+		</div>
+	</body>
+
+</html>
