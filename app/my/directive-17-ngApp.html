@@ -1,0 +1,27 @@
+<!doctype html>
+<html >
+
+	<head>
+		<title>directive</title>
+		<style type="text/css">
+		</style>
+		<script src="../bower_components/angular/angular.js"></script>
+		<script>
+			angular.module('ngAppDemo', []).controller('ngAppDemoController', function($scope) {
+				$scope.a = 1;
+				$scope.b = 2;
+			});
+		</script>
+	</head>
+
+	<body ng-app="ngAppDemo">
+		Only one AngularJS application can be auto-bootstrapped per HTML document. The first ngApp found in the document will be used to define the root element to auto-bootstrap as an application. To run multiple applications in an HTML document you must manually
+		bootstrap them using angular.bootstrap instead. AngularJS applications cannot be nested(嵌套) within each other.
+
+		<div ng-controller="ngAppDemoController">
+			I can add: {{a}} + {{b}} = {{ a+b }}
+		</div>
+
+	</body>
+
+</html>
