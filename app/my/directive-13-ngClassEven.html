@@ -1,0 +1,38 @@
+<!doctype html>
+<html ng-app="myapp">
+
+	<head>
+		<title>directive</title>
+		<style type="text/css">
+			.odd {
+				color: red;
+			}
+			.even {
+				color: blue;
+			}
+		</style>
+		<script src="../bower_components/angular/angular.js"></script>
+		<script>
+			angular.module('myapp', [])
+				.controller('ExampleController', ['$scope',
+					function($scope) {
+						$scope.counter = 0;
+						$scope.change = function() {
+							$scope.counter++;
+						};
+					}
+				]);
+		</script>
+	</head>
+
+	<body ng-controller="ExampleController">
+
+		<ol ng-init="names=['John', 'Mary', 'Cate', 'Suz']">
+			<li ng-repeat="name in names">
+				<span ng-class-odd="'odd'" ng-class-even="'even'">{{name}} &nbsp; &nbsp; &nbsp;</span>
+			</li>
+		</ol>
+
+	</body>
+
+</html>
