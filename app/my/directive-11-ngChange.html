@@ -1,0 +1,48 @@
+<!doctype html>
+<html ng-app="myapp">
+
+	<head>
+		<title>directive</title>
+		<style type="text/css">
+			.strike {
+				text-decoration: line-through;
+			}
+			.bold {
+				font-weight: bold;
+			}
+			.red {
+				color: red;
+			}
+		</style>
+		<script src="../bower_components/angular/angular.js"></script>
+		<script>
+			angular.module('myapp', [])
+				.controller('ExampleController', ['$scope',
+					function($scope) {}
+				]);
+		</script>
+	</head>
+
+	<body ng-controller="ExampleController">
+		<p ng-class="{strike: deleted, bold: important, red: error}">Map Syntax Example</p>
+		<input type="checkbox" ng-model="deleted"> deleted (apply "strike" class)
+		<br>
+		<input type="checkbox" ng-model="important"> important (apply "bold" class)
+		<br>
+		<input type="checkbox" ng-model="error"> error (apply "red" class)
+		<hr>
+
+		<p ng-class="style">Using String Syntax</p>
+		<input type="text" ng-model="style" placeholder="Type: bold strike red">
+		<hr>
+
+		<p ng-class="[style1Val, style2Val, style3Val]">Using Array Syntax</p>
+		<input ng-model="style1Val" placeholder="Type: bold, strike or red">
+		<br>
+		<input ng-model="style2Val" placeholder="Type: bold, strike or red">
+		<br>
+		<input ng-model="style3Val" placeholder="Type: bold, strike or red">
+		<br>
+	</body>
+
+</html>

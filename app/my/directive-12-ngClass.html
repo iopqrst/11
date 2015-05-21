@@ -1,0 +1,34 @@
+<!doctype html>
+<html ng-app="myapp">
+
+	<head>
+		<title>directive</title>
+		<script src="../bower_components/angular/angular.js"></script>
+		<script>
+			angular.module('myapp', [])
+				.controller('ExampleController', ['$scope',
+					function($scope) {
+						$scope.counter = 0;
+						$scope.change = function() {
+							$scope.counter++;
+						};
+					}
+				]);
+		</script>
+	</head>
+
+	<body ng-controller="ExampleController">
+		<div ng-controller="ExampleController">
+			<input type="checkbox" name="first" ng-model="confirmed" ng-change="change()" id="ng-change-example1" />
+			<label for="ng-change-example1">first</label>
+			<input type="checkbox" name="second" ng-model="confirmed2" id="ng-change-example2" />
+			<label for="ng-change-example2">Confirmed</label>
+			<br />
+			<tt>debug = {{confirmed}}</tt>
+			<br/>
+			<tt>counter = {{counter}}</tt>
+			<br/>
+		</div>
+	</body>
+
+</html>
