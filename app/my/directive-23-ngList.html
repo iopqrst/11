@@ -1,0 +1,44 @@
+<!doctype html>
+<html ng-app="initExample">
+
+	<head>
+		<title>directive</title>
+		<style type="text/css">
+		</style>
+		<script src="../bower_components/angular/angular.js"></script>
+		<script>
+			var initExample = angular.module('initExample', []);
+			
+			initExample.controller('ExampleController', ['$scope', function(scope) {
+				scope.names = ['morpheus', 'neo', 'trinity'];
+			}]);
+		</script>
+	</head>
+
+	<body>
+
+		<textarea ng-model="list" ng-list="," ng-trim="false"></textarea>
+		<pre>{{ list | json }}</pre>
+
+		<hr />
+
+		<form name="myForm" ng-controller="ExampleController">
+			List:
+			<input name="namesInput" ng-model="names" ng-list required minlength="30">
+			<span class="error" ng-show="myForm.namesInput.$error.required">
+   Required!</span>
+			<br>
+			<tt>names = {{names}}</tt>
+			<br/>
+			<tt>myForm.namesInput.$valid = {{myForm.namesInput.$valid}}</tt>
+			<br/>
+			<tt>myForm.namesInput.$error = {{myForm.namesInput.$error}}</tt>
+			<br/>
+			<tt>myForm.$valid = {{myForm.$valid}}</tt>
+			<br/>
+			<tt>myForm.$error.required = {{!!myForm.$error.required}}</tt>
+			<br/>
+		</form>
+	</body>
+
+</html>
