@@ -1,0 +1,26 @@
+<!doctype html>
+<html ng-app>
+
+	<head>
+		<title>directive</title>
+		<style type="text/css">
+		</style>
+		<script src="../bower_components/angular/angular.js"></script>
+		<script src="../bower_components/angular-animate/angular-animate.js"></script>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+
+		<script type="text/ng-template" id="/tpl.html">
+			Content of the template.
+		</script>
+
+		<a ng-click="currentTpl='/tpl.html'" id="tpl-link">Load inlined template</a>
+		<div id="tpl-content" ng-include src="currentTpl"></div>
+
+	</body>
+
+</html>

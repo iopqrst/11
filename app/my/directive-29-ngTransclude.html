@@ -1,0 +1,47 @@
+<!doctype html>
+<html ng-app="transcludeExample">
+
+	<head>
+		<title>directive</title>
+		<style type="text/css">
+			
+		</style>
+		<script src="../bower_components/angular/angular.js"></script>
+		<script src="../bower_components/angular-animate/angular-animate.js"></script>
+		<script>
+			angular.module('transcludeExample', [])
+				.directive('pane', function() {
+					return {
+						restrict: 'E',
+						transclude: true,
+						scope: {
+							title: '@'
+						},
+						template: '<div style="border: 1px solid black;">' +
+							'<div style="background-color: gray">{{title}}</div>' +
+							'<ng-transclude></ng-transclude>' +
+							'</div>'
+					};
+				})
+				.controller('ExampleController', ['$scope',
+					function($scope) {
+						$scope.title = 'Lorem Ipsum';
+						$scope.text = 'Neque porro quisquam est qui dolorem ipsum quia dolor...';
+					}
+				]);
+		</script>
+	</head>
+
+	<body>
+
+		<div ng-controller="ExampleController">
+			<input ng-model="title">
+			<br/>
+			<textarea ng-model="text"></textarea>
+			<br/>
+			<pane title="{{title}}">{{text}}</pane>
+		</div>
+
+	</body>
+
+</html>
