@@ -1,0 +1,113 @@
+<!doctype html>
+<html ng-app="includeExample">
+
+	<head>
+		<title>directive</title>
+		<style type="text/css">
+		</style>
+		<script src="../bower_components/angular/angular.js"></script>
+		<script src="../bower_components/angular-animate/angular-animate.js"></script>
+		<script>
+			var myApp = angular.module('includeExample', ['ngAnimate']);
+			myApp.directive('ngIf', function() {
+				return {
+					link: function(scope, element, attrs) {
+						if (scope.$eval(attrs.ngIf)) {
+							// remove '<div ng-if...></div>'
+							element.replaceWith(element.children())
+						} else {
+							element.replaceWith(' ')
+						}
+					}
+				}
+			});
+			myApp.controller('MyCtrl', ['$scope',
+				function($scope) {
+					$scope.data = {};
+					$scope.showFrom = function(message) {
+						return message.hasOwnProperty('from')
+					};
+					$scope.showCreatedBy = function(message) {
+						return message.hasOwnProperty('createdBy')
+					};
+					$scope.showTo = function(message) {
+						return message.hasOwnProperty('to')
+					};
+					$scope.data.messages = [{
+						"type": "phone",
+						"date": "25/12/2012",
+						"time": "11.34",
+						"createdBy": {
+							"name": "Jenny Forster1",
+							"avatarFileName": "jenny-forster.jpg"
+						},
+						"from": {
+							"name": "Jenny Forster1",
+							"avatarFileName": "jenny-forster.jpg"
+						},
+						"to": {
+							"name": "Daniel Craig1",
+							"avatarFileName": "daniel-craig.jpg"
+						},
+						"title": "This is the title of a phone call"
+					}, {
+						"type": "email",
+						"date": "25/12/2012",
+						"time": "11.34",
+						"createdBy": {
+							"name": "Jenny Forster2",
+							"avatarFileName": "jenny-forster.jpg"
+						},
+						"from": {
+							"name": "Daniel Craig2",
+							"avatarFileName": "daniel-craig.jpg"
+						},
+						"to": {
+							"name": "Jenny Forster2",
+							"avatarFileName": "jenny-forster.jpg"
+						},
+						"title": "This is the title of an email"
+					}, {
+						"type": "meeting",
+						"date": "25/12/2012",
+						"time": "11.34",
+						"createdBy": {
+							"name": "Jenny Forster3",
+							"avatarFileName": "jenny-forster.jpg"
+						},
+						"title": "This is the title of a meeting"
+					}, {
+						"type": "note",
+						"date": "25/12/2012",
+						"time": "11.34",
+						"createdBy": {
+							"name": "Jenny Forster4",
+							"avatarFileName": "jenny-forster.jpg"
+						},
+						"title": "This is the title of a note"
+					}]
+				}
+			]);
+		</script>
+	</head>
+
+	<body>
+
+		<div ng-controller="MyCtrl">
+			<div ng-repeat="message in data.messages" ng-class="message.type">
+				<hr>
+				<div ng-if="showFrom(message)">
+					<div>From: {{message.from.name}} + {{message.title}}</div>
+				</div>
+				<div ng-if="showCreatedBy(message)">
+					<div>Created by: {{message.createdBy.name}} + {{message.title}} </div>
+				</div>
+				<div ng-if="showTo(message)">
+					<div>To: {{message.to.name}} + {{message.title}}</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+
+</html>
