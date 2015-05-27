@@ -1,0 +1,32 @@
+<!doctype html>
+<html ng-app="myModule">
+
+	<head>
+		<title>directive</title>
+		<style type="text/css">
+		</style>
+		<script src="../bower_components/angular/angular.js"></script>
+	</head>
+
+	<body>
+
+		
+
+		<script>
+			 // Create a new module
+			var myModule = angular.module('myModule', []);
+			 // register a new service
+			myModule.value('appName', 'MyCoolApp');
+			 // configure existing services inside initialization blocks.
+			myModule.config(['$locationProvider',
+				function($locationProvider) {
+					// Configure existing providers
+					$locationProvider.hashPrefix('!');
+				}
+			]);
+			
+			var injector = angular.injector(['ng', 'myModule']);
+		</script>
+	</body>
+
+</html>
