@@ -1,0 +1,73 @@
+<!doctype html>
+<html ng-app="app">
+
+	<head>
+		<title>directive</title>
+		<style type="text/css">
+
+		</style>
+		<script src="../bower_components/angular/angular.js"></script>
+	</head>
+
+	<body>
+		
+		<!--<div ng-controller="MyCtrl">
+			<greeting methodName="sayHello(name)"></greeting><br />
+			<greeting methodName="sayHello(name)"></greeting><br />
+			<greeting methodName="sayHello(name)"></greeting><br />
+		</div>
+
+		<script>
+			var app = angular.module('app', []);
+			
+			app.controller('MyCtrl',['$scope', function($scope){
+				$scope.sayHello = function(name) {
+					alert ( 'say hello to ' + name);
+				}
+			}]);
+			
+			app.directive('greeting', function() {
+				return {
+					scope:{
+						methodName : '&'
+					},
+					restrict: 'AE', 
+					template: '<input type="text" ng-model="userName" />' + 
+							  '<input type="button" ng-click="methodName({name:userName})" value="show name"/>'
+				};
+			});
+		</script>-->
+		
+		<!--
+        	上面的代码执行不成功，原因是因为methodName的缘故，F12 查看代码
+        -->
+
+		<div ng-controller="MyCtrl">
+			<greeting method="sayHello(name)"></greeting>
+			<greeting method="sayHello(name)"></greeting>
+			<greeting method="sayHello(name)"></greeting>
+		</div>
+
+		<script>
+			var app = angular.module('app', []);
+			
+			app.controller('MyCtrl',['$scope', function($scope){
+				$scope.sayHello = function(name) {
+					alert ( 'say hello to ' + name);
+				}
+			}]);
+			
+			app.directive('greeting', function() {
+				return {
+					scope:{
+						method : '&'
+					},
+					restrict: 'AE', 
+					template: '<input type="text" ng-model="userName" />' + 
+							   '<input type="button" ng-click="method({name:userName})" value="show name"/>'
+				};
+			});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html ng-app="app">
+
+	<head>
+		<title>directive</title>
+		<style type="text/css">
+
+		</style>
+		<script src="../bower_components/angular/angular.js"></script>
+	</head>
+
+	<body>
+
+		<hello></hello>
+		<div hello></div>
+		<div class="hello"></div>
+		<!-- directive:hello -->
+		<div></div>
+
+		<script>
+			var app = angular.module('app', []);
+			app.directive('hello', function() {
+				return {
+					scope:{},
+					restrict: 'AEMC', //A:attribute , E:element, M : comment , C: comment
+					template: '<div><input type="text" ng-model="userName"/>{{userName}}</div>',
+					replace: true // replace 为true 最后一个才会起作用，否则no work
+				};
+			});
+		</script>
+	</body>
+
+</html>

@@ -13,7 +13,9 @@ phonecatControllers.controller('PhoneListCtrl', ['$scope', 'Phone',
 
 phonecatControllers.controller('MyPhoneListCtrl', ['$scope', 'MyPhone',
 	function($scope, MyPhone) {
-		MyPhone.query({phoneId: 'phones-list.json'},function(_phones){
+		MyPhone.query({
+			phoneId: 'phones-list.json'
+		}, function(_phones) {
 			console.info('phones size = ' + _phones.length);
 			$scope.phones = _phones;
 		});
