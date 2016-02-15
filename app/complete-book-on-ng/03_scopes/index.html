@@ -1,21 +1,31 @@
 <!doctype html>
 <html>
-<head>
-  <title>Scopes Example</title>
-  <script src="/learn-angular/app/bower_components/angular/angular.js"></script>
-</head>
-<body>
-  <div ng-app="myApp">
-    <div ng-controller="MyController">
-      My favorite childhood movie: {{ movie }}
-    </div>
-  </div>
 
-  <script>
-    angular.module("myApp", [])
-    .controller("MyController", ['$scope', function($scope) {
-      $scope.movie = "Duck Tails";
-    }]);
-  </script>
-</body>
+	<head>
+		<title>Scopes Example</title>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+	</head>
+
+	<body>
+		<div ng-app="myApp">
+			<div ng-controller="MyController">
+				My favorite childhood movie: {{ movie }} <br />
+				person's Object: {{person.age}} | {{person.name}} | {{person.mobile}}
+			</div>
+		</div>
+
+		<script>
+			angular.module("myApp", [])
+				.controller("MyController", ['$scope', function($scope) {
+					$scope.movie = "Duck Tails";
+					
+					$scope.person = {
+						age : 100,
+						name : 'monkey',
+						mobile : '188183879293'
+					}
+				}]);
+		</script>
+	</body>
+
 </html>

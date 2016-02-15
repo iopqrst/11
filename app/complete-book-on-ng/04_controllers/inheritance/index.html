@@ -1,32 +1,36 @@
 <!doctype html>
 <html ng-app="myApp">
-<head>
-  <title>Simple App</title>
-  <script src="/learn-angular/app/bower_components/angular/angular.js"></script>
-</head>
-<body>
 
-  <div ng-controller="ParentController">
-    <div ng-controller="ChildController">
-      <a href="#" ng-click="sayHello()">Say hello</a>
-    </div>
-    {{ person }}
-  </div>
+	<head>
+		<title>Simple App</title>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+	</head>
 
-  <script>
-    var app = angular.module('myApp', []);
+	<body>
 
-    app.controller('ParentController', function($scope) {
-      $scope.person = { greeted: false };
-    })
+		<div ng-controller="ParentController">
+			<div ng-controller="ChildController">
+				<a href="#" ng-click="sayHello()">Say hello</a>
+			</div>
+			{{ person }}
+		</div>
 
-    app.controller('ChildController', function($scope) {
-      $scope.sayHello = function() {
-        $scope.person.name = "Ari Lerner";
-        $scope.person.greeted = true;
-      }
-    })
-  </script>
+		<script>
+			var app = angular.module('myApp', []);
+			app.controller('ParentController', function($scope) {
+				$scope.person = {
+					greeted: false
+				};
+			});
+			
+			app.controller('ChildController', function($scope) {
+				$scope.sayHello = function() {
+					$scope.person.name = "Ari Lerner";
+					$scope.person.greeted = true;
+				}
+			});
+		</script>
 
-</body>
+	</body>
+
 </html>

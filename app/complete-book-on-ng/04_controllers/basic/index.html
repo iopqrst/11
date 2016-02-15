@@ -1,26 +1,27 @@
 <!doctype html>
 <html ng-app="myApp">
-<head>
-  <title>Basic Controller Example</title>
-  <script src="/learn-angular/app/bower_components/angular/angular.js"></script>
-</head>
-<body>
 
-  <div ng-controller="MyController">
-    <h1>{{ person }}</h1>
-    and their name:
-    <h2>{{ person.name }}</h2>
-  </div>
+	<head>
+		<title>Basic Controller Example</title>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+	</head>
 
+	<body>
 
-  <script>
-    var app = angular.module('myApp', []);
-    app.controller('MyController', function($scope) {
-      $scope.person = {
-        name: "Ari Lerner"
-      };
-    });
-  </script>
+		<div ng-controller="MyController">
+			<h1>{{ person }}</h1> and their name:
+			<h2>{{ person.name }}</h2>
+		</div>
 
-</body>
+		<script>
+			var app = angular.module('myApp', []);
+			app.controller('MyController', function($scope) {
+				$scope.person = {
+					name: "Ari Lerner"
+				};
+			});
+		</script>
+
+	</body>
+
 </html>

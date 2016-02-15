@@ -9,6 +9,7 @@ app.controller('MyController', ['$scope', function($scope) {
 	};
 	setInterval(function() {
 		$scope.$apply(updateClock);
+		
 	}, 1000);
 	updateClock();
 }]);
