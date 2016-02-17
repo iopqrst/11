@@ -1,18 +1,23 @@
 <!doctype html>
 <html ng-app="myApp">
-<head>
-  <script src="/learn-angular/app/bower_components/angular/angular.js"></script>
-</head>
-<body>
 
-  Check me check multiple: <input type="checkbox" ng-model="open"><br/>
-  <details id="details" ng-open="open">
-     <summary>Show/Hide me</summary>
-  </details>
+	<head>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+	</head>
 
-  <script>
-    angular.module('myApp', [])
-  </script>
+	<body>
 
-</body>
+		Check me check multiple:
+		<input type="checkbox" ng-model="open">
+		<br/>
+		<details id="details" ng-open="open">
+			<summary>Show/Hide me</summary>
+		</details>
+
+		<script>
+			angular.module('myApp', [])
+		</script>
+
+	</body>
+
 </html>
