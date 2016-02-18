@@ -9,6 +9,28 @@
 	<body>
 		<input ng-model="name" type="text" placeholder="Your name">
 		<h1>Hello {{ name }}</h1>
+		
+		<script type="text/javascript">
+		
+			// 由于JavaScript自身的特点，以及它在传递值和引用时的不同处理方式，通常认为，在视图中
+			// 通过对象的属性而非对象本身来进行引用绑定，是Angular中的最佳实践。 
+			function init( num ) {
+				num++;
+			}
+			
+			function init( obj ) {
+				obj.a++;
+			}
+			
+			var a = 1;
+			init(a);
+			alert(a);
+			
+			//demo 2
+			var b = {a:1};
+			init(b);
+			alert(b.a);
+		</script>
 	</body>
 
 </html>

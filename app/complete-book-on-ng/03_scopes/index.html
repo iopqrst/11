@@ -9,6 +9,7 @@
 	<body>
 		<div ng-app="myApp">
 			<div ng-controller="MyController">
+				hello {{keyword}} <br />
 				My favorite childhood movie: {{ movie }} <br />
 				person's Object: {{person.age}} | {{person.name}} | {{person.mobile}}
 			</div>
@@ -16,7 +17,12 @@
 
 		<script>
 			angular.module("myApp", [])
-				.controller("MyController", ['$scope', function($scope) {
+				.controller("MyController", ['$rootScope', '$scope', function($rootScope, $scope) {
+					
+					$rootScope.keyword = ', world!';
+					
+					$scope.keyword = ', world (from scope)';
+					
 					$scope.movie = "Duck Tails";
 					
 					$scope.person = {
