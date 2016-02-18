@@ -1,0 +1,75 @@
+<!doctype html>
+<html ng-app="app">
+
+	<head>
+		<title>directive</title>
+		<style>
+			table {
+				border:1px solid green;
+				border-collapse: collapse;
+				width: 300px;
+			}
+			
+			th, td {
+				border:1px solid green;
+				text-align: center;
+			}
+		</style>
+		<script src="../bower_components/angular/angular.js"></script>
+	</head>
+
+	<body>
+
+		<!--<hello>
+			<div>这里是指令内部的内容。</div>
+		</hello>-->
+		
+		<hello>
+			<span>这里是指令内部的内容。</span>
+			<table>
+				<tr>
+					<th>序号</th>
+					<th>内容</th>
+					<th>操作</th>
+				</tr>
+				
+				<tr>
+					<td>1</td>
+					<td>这里是内容</td>
+					<td>
+						<a href="#">删除</a>
+						<a href="#">处理</a>
+					</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>这里是内容</td>
+					<td>
+						<a href="#">删除</a>
+						<a href="#">处理</a>
+					</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>这里是内容</td>
+					<td>
+						<a href="#">删除</a>
+						<a href="#">处理</a>
+					</td>
+				</tr>
+			</table>
+		</hello>
+
+		<script>
+			var app = angular.module("app", []);
+			app.directive("hello", function() {
+				return {
+					restrict: "AE",
+					transclude: true,
+					template: "<div>Hello everyone!<div ng-transclude></div></div>"
+				}
+			});
+		</script>
+	</body>
+
+</html>
