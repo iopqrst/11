@@ -9,7 +9,7 @@
 	<body>
 
 		<div id="emailEditor" ng-controller="MyController">
-			<input ng-model="to" type="email" placeholder="Recipient" />
+			<input ng-model="to22" type="email" placeholder="Recipient" />
 			<textarea ng-model="emailBody"></textarea>
 
 			<div id="emailPreview">
@@ -18,6 +18,10 @@
 		</div>
 
 		<script>
+			/**
+			 *  to 貌似是关键字，源代码中使用的是to,无法正常获取到值
+			 */
+		
 			// to see this example in action open in your browser, type
 			// an email address into the email field. Then in the text area
 			// box type: Hello {{ to }}.
@@ -27,9 +31,12 @@
 						// Set up a watch
 						$scope.$watch('emailBody', function(body) {
 							if (body) {
+								
+								console.log( $scope.to22 )
+								
 								$scope.previewText =
 									EmailParser.parse(body, {
-										to: $scope.to
+										to: $scope.to22
 									});
 							}
 						});
@@ -47,8 +54,13 @@
 						// a service to handle parsing
 						return {
 							parse: function(text, context) {
+								
+								console.info( 'text = ' + text);
 								var template = $interpolate(text);
-								return template(context);
+								
+								console.info ( template(context) );
+								
+								return template('1' + context + '2');
 							}
 						};
 					}

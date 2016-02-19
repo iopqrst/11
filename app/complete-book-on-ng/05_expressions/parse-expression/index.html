@@ -24,14 +24,17 @@
 						if (newVal !== oldVal) {
 							// Let's set up our parseFun with the expression
 							
-							console.log('newValue = ' + newVal + ", oldVal = " + oldVal );
+//							console.log('newValue = ' + newVal + ", oldVal = " + oldVal );
 
 							var parseFun = $parse(newVal);
-							console.log(parseFun);
-							console.log(scope);
 							
+							console.info ( parseFun(scope) );
 							// Get the value of the parsed expression, set it on the scope for output
-							scope.parsedExpr = parseFun(scope);
+							$scope.parsedExpr = parseFun(scope);
+							
+							
+							
+							// 有问题呀 
 						}
 					});
 				}]);
