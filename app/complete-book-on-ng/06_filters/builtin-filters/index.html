@@ -23,6 +23,7 @@
 			<div>{{ today | date:'shortDate' }}</div>
 			<div>{{ today | date:'mediumTime' }}</div>
 			<div>{{ today | date:'shortTime' }}</div>
+			<div style="background: #FF0000;">yyyy-MM-dd HH:mm:ss.sss : {{today | date:'yyyy-MM-dd HH:mm:ss.sss'}}</div>
 			<div>Month in year: {{ today | date:'MMMM' }}</div>
 			<div>Short month in year: {{ today | date:'MMM' }}</div>
 			<div>Padded month in year: {{ today | date:'MM' }}</div>
@@ -107,13 +108,15 @@
 
 		<script>
 			angular.module('myApp', [])
-			    .controller('DemoController', function($scope, $filter) {
-			      $scope.name = "Ari Lerner";
-			      $scope.lowercaseName = $filter('lowercase')('Ari');
-			      $scope.today = new Date();
-			      $scope.isCapitalized =
-			        function(str) { return str[0] == str[0].toUpperCase(); }
-			    })
+				.controller('DemoController', function($scope, $filter) {
+					$scope.name = "Ari Lerner";
+					$scope.lowercaseName = $filter('lowercase')('Ari');
+					$scope.today = new Date();
+					$scope.isCapitalized =
+						function(str) {
+							return str[0] == str[0].toUpperCase();
+						}
+				})
 		</script>
 
 	</body>

@@ -9,8 +9,9 @@
 	<body>
 
 		<div id="emailEditor" ng-controller="MyController">
-			<input ng-model="to22" type="email" placeholder="Recipient" />
-			<textarea ng-model="emailBody"></textarea>
+			TO: <input ng-model="to" type="email" placeholder="Recipient" autofocus="autofocus"/>
+			<br />
+			<textarea ng-model="emailBody" cols="50" rows="10"></textarea>
 
 			<div id="emailPreview">
 				<pre>__ previewText __</pre>
@@ -18,10 +19,6 @@
 		</div>
 
 		<script>
-			/**
-			 *  to 貌似是关键字，源代码中使用的是to,无法正常获取到值
-			 */
-		
 			// to see this example in action open in your browser, type
 			// an email address into the email field. Then in the text area
 			// box type: Hello {{ to }}.
@@ -31,17 +28,19 @@
 						// Set up a watch
 						$scope.$watch('emailBody', function(body) {
 							if (body) {
-								
-								console.log( $scope.to22 )
-								
+								// 现在，在{{ previewText }}内部的文本中可以将{{ to }}当做一个变量来使用，
+								// 并对文本的变化进行实时更新。
 								$scope.previewText =
+									
+									// to 相当于body中用的变量名称
 									EmailParser.parse(body, {
-										to: $scope.to22
+										to: $scope.to
 									});
 							}
 						});
 					}
 				]);
+				
 			angular.module('emailParser', [])
 				.config(['$interpolateProvider',
 					function($interpolateProvider) {
@@ -54,13 +53,10 @@
 						// a service to handle parsing
 						return {
 							parse: function(text, context) {
-								
-								console.info( 'text = ' + text);
+								console.info('text = ' + text);
 								var template = $interpolate(text);
-								
-								console.info ( template(context) );
-								
-								return template('1' + context + '2');
+								console.info(template(context));
+								return template(context);
 							}
 						};
 					}

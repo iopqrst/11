@@ -9,34 +9,25 @@
 	<body>
 
 		<div ng-controller="MyController">
-			<input ng-model="expr" type="text" placeholder="Enter an expression" />
-			<div>{{ parsedExpr }}</div>
+			<h1>{{ParsedValue}}</h1>
 		</div>
 
 		<script>
 			// open this example and type person.name into the test field
 			angular.module('myApp', [])
 				.controller('MyController', ['$scope', '$parse', function($scope, $parse) {
-					$scope.person = {
-						name: "Ari Lerner"
+					var context = {
+						name: "dreamapple",
+						age : 28,
+						whatever: '阿斯顿发生发大阿斯顿发生的'
 					};
-					$scope.$watch('expr', function(newVal, oldVal, scope) {
-						if (newVal !== oldVal) {
-							// Let's set up our parseFun with the expression
-							
-//							console.log('newValue = ' + newVal + ", oldVal = " + oldVal );
-
-							var parseFun = $parse(newVal);
-							
-							console.info ( parseFun(scope) );
-							// Get the value of the parsed expression, set it on the scope for output
-							$scope.parsedExpr = parseFun(scope);
-							
-							
-							
-							// 有问题呀 
-						}
-					});
+					
+					
+					// 因为这个解析的语句中含有我们想要解析的表达式，
+					// 所以要把不相关的用引号引起来，整体然后用+连接
+					var expression = "'Hello ' + name + ', age ' + age + ' , 随便写点东西也可以吗？' + whatever ";
+					var parseFunc = $parse(expression);
+					$scope.ParsedValue = parseFunc(context);
 				}]);
 		</script>
 
