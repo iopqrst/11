@@ -1,0 +1,87 @@
+<!doctype html>
+<html ng-app="myApp">
+
+	<head>
+		<title>Built In Filters</title>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+	</head>
+
+	<body>
+
+		<div ng-controller="DemoController">
+			<div>原始：['Ari', 'Lerner', 'Likes', 'To', 'Eat', 'Pizza']</div>
+			<div>{{ ['Ari', 'Lerner', 'Likes', 'To', 'Eat', 'Pizza'] | filter:'e' }}</div>
+			<div>{{ ['Ari', 'Lerner', 'Likes', 'To', 'Eat', 'Pizza'] | filter:'!e' }}</div>
+			<div>
+				原始： [{ 'name': 'Ari', 'City': 'San Francisco', 'favorite food': 'Pizza' }, { 'name': 'Nate', 'City': 'San Francisco', 'favorite food': 'indian food' }]
+			</div>
+
+			<div>
+				{{ [{ 'name': 'Ari', 'City': 'San Francisco', 'favorite food': 'Pizza' }, { 'name': 'Nate', 'City': 'San Francisco', 'favorite food': 'indian food' }] | filter:{'favorite food': 'Pizza'} }}
+			</div>
+
+			<div>
+				{{ [{ 'name': 'Ari', 'City': 'San Francisco', 'favorite food': 'Pizza' }, { 'name': 'Nate', 'City': 'San Francisco', 'favorite food': 'indian food' }] | filter:{'favorite food': '!Pizza'} }}
+			</div>
+
+			<div>{{ ['Ari', 'likes', 'to', 'travel'] | filter:isCapitalized }}</div>
+
+			<!--
+            	作者：opqrst@163.com
+            	时间：2016-02-20
+            	描述：我自己写的，但事实没有按照我的想法进行
+            
+			<div>{{ ['Ari', 'likes', 'to', 'travel'] | filter:isStartWith:'a' }}</div>
+			
+			-->
+		</div>
+
+		<div>
+			<h5>Output JSON:</h5>
+			<div>{{ {'name': 'Ari', 'City': 'San Francisco'} | json }}</div>
+		</div>
+
+		<div>
+			<h5>limitTo:</h5>
+			<div>{{ ['a', 'b', 'c', 'd', 'e', 'f'] | limitTo:3 }}</div>
+		</div>
+
+		<div>
+			{{ 1234566 | number }} <br />
+			截取时是四舍五入：{{12.34567 | number:3}} <br />
+			{{12.34567 | number:1}}
+		</div>
+
+		<div>
+			<h5>orderBy:</h5>
+			<div>
+				{{ [{ 'name': 'Ari', 'status': 'awake' }, { 'name': 'Q', 'status': 'sleeping' }, { 'name': 'Nate', 'status': 'awake' }] | orderBy: '+name' }}
+			</div>
+			
+			<div>
+				{{['zhangsan', 'lisi','wangwu'] | orderBy:'-'}}
+			</div>
+			
+			<div>
+				{{['zhangsan', 'lisi','wangwu'] | orderBy}} || {{['zhangsan', 'lisi','wangwu'] | orderBy:'+'}}
+			</div>
+		</div>
+
+		<script>
+			angular.module('myApp', [])
+				.controller('DemoController', function($scope, $filter) {
+					$scope.name = "Ari Lerner";
+					$scope.lowercaseName = $filter('lowercase')('Ari');
+					$scope.today = new Date();
+					$scope.isCapitalized = function(str) {
+						return str[0] == str[0].toUpperCase();
+					};
+					$scope.isStartWith = function(str, startChar) {
+						return str[0].toLowerCase() == startChar.toLowerCase();
+					}
+				})
+		</script>
+
+	</body>
+
+</html>

@@ -1,0 +1,21 @@
+<!doctype html>
+<html ng-app="myApp" ng-init="greeting = 'hello world 1!'">
+
+	<head>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+	</head>
+
+	<body>
+
+		<h1> {{greeting}}</h1>
+		<h1 ng-controller="MyController">{{ greeting }}</h1>
+
+		<script>
+			angular.module('myApp', []).controller('MyController', ['$scope', function($scope) {
+				$scope.greeting = 'hello world 2!';
+			}]);
+		</script>
+
+	</body>
+
+</html>
