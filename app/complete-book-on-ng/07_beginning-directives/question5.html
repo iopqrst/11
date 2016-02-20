@@ -1,0 +1,29 @@
+<!doctype html>
+<html ng-app="myApp">
+
+	<head>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+	</head>
+
+	<body>
+
+		<div my-directive my-link-text="Click me to go to HenMimang"></div>
+
+		<script>
+			angular.module('myApp', [])
+				.directive('myDirective', function() {
+					return {
+						restrict: 'A',
+						replace: true,
+						scope: {
+							myLinkText: '@'
+						},
+						// 外层如果不加div会报错(must have exactly one root element.)，或者去掉replace: true 这是为什么？
+						template: '<input type="text" ng-model="myUrl" /><a target="_blank" href="{{ myUrl }}">{{ myLinkText }}</a>'
+					}
+				})
+		</script>
+
+	</body>
+
+</html>

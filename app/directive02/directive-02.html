@@ -15,14 +15,13 @@
 		<div hello></div>
 		<div class="hello"></div>
 		<!-- directive:hello -->
-		<div></div>
 
 		<script>
 			var app = angular.module('app', []);
 			app.directive('hello', function() {
 				return {
 					restrict: 'AEMC', //A:attribute , E:element, M : comment , C: comment
-					template: '<div>asfasdfasd</div>',
+					template: '<div>指令内容</div>',
 					replace: true // replace 为true 最后一个才会起作用，否则no work
 				};
 			});

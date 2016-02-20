@@ -7,15 +7,19 @@
 
 	<body>
 
-		<my-directive></my-directive>
-		<div my-directive></div>
+		<div my-directive my-url="http://www.henmiamng.com" my-link-text="Click me to go to HenMimang"></div>
 
 		<script>
 			angular.module('myApp', [])
 				.directive('myDirective', function() {
 					return {
-						restrict: 'AE',   //A 属性 E元素
-						template: '<a href="http://google.com">Click me</a>'
+						restrict: 'A',
+						replace: true,
+						scope : {
+							myUrl : '@myUrl',
+							myLinkText : '@'
+						},
+						template: '<a href="{{ myUrl }}">{{ myLinkText }}</a>'
 					}
 				})
 		</script>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html ng-app="myApp">
+
+	<head>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+	</head>
+
+	<body>
+
+		<input type="text" ng-model="surl" value="http://www.baidu.com" placeholder="Please input a site url" />
+		<div my-directive my-url="{{surl}}" my-link-text="Click me to go to HenMimang"></div>
+
+		<script>
+			angular.module('myApp', [])
+				.directive('myDirective', function() {
+					return {
+						restrict: 'A',
+						replace: true,
+						scope : {
+							myUrl : '@',  // 将指令作用域中的myUrl与DOM my-url 绑定
+							myLinkText : '@myLinkText'  // 将指令作用域中的 myLinkText 与 DOM 绑定
+						},
+						template: '<a target="_blank" href="{{ myUrl }}">{{ myLinkText }}</a>'
+					}
+				})
+		</script>
+
+	</body>
+
+</html>

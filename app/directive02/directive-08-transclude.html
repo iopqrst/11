@@ -66,6 +66,7 @@
 				return {
 					restrict: "AE",
 					transclude: true,
+					replace: true, 	// 同样起作用
 					template: "<div>Hello everyone!<div ng-transclude></div></div>"
 				}
 			});
