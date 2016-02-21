@@ -13,18 +13,18 @@
 
 		<script>
 			angular.module('myApp', [])
-			    .directive('myDirective', function() {
-			      return {
-			        restrict: 'A',
-			        replace: true,
-			        scope: {
-			          myUrl: '@',     // binding strategy
-			          myLinkText: '@' // binding strategy
-			        },
-			        template: '<a href="{{myUrl}}">' +
-			          '{{myLinkText}}</a>'
-			      }
-			    })
+				.directive('myDirective', function() {
+					return {
+						restrict: 'A',
+						replace: true,
+						scope: {
+							myUrl: '@someAttr', // binding strategy
+							myLinkText: '@' //除非指定了，否则默认寻找对应的 my-link-text
+						},
+						template: '<a href="{{myUrl}}">' +
+							'{{myLinkText}}</a>'
+					}
+				})
 		</script>
 
 	</body>

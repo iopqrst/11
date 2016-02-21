@@ -7,9 +7,11 @@
 		<style>
 			.odd {
 				background-color: blue;
+				opacity: 0.5;
 			}		
 			.even {
 				background-color: red;
+				opacity: 0.5;
 			}
 		</style>
 	</head>
@@ -18,6 +20,12 @@
 
 		<ul ng-controller="PeopleController">
 			<li ng-repeat="person in people" ng-class="{even: !$even, odd: !$odd}">
+				{{person.name}} lives in {{person.city}}
+			</li>
+			
+			<br />
+			
+			<li ng-repeat="person in people" ng-class="{even: $even, odd: $odd}">
 				{{person.name}} lives in {{person.city}}
 			</li>
 		</ul>
@@ -31,6 +39,9 @@
 					}, {
 						name: "Erik",
 						city: "Seattle"
+					}, {
+						name: "Jean chen",
+						city: "China Beijing"
 					}];
 				});
 		</script>

@@ -19,15 +19,14 @@
 			</button>
 			<div>
 
-				<script>
-					angular.module('myApp', [])
-						.controller('CounterController', function($scope) {
-							$scope.decrement = function() {
-								$scope.count = $scope.count - 1;
-							};
-						})
-				</script>
-
+			<script>
+				angular.module('myApp', [])
+					.controller('CounterController', ['$scope', function($scope) {
+						$scope.decrement = function() {
+							$scope.count = $scope.count - 1;
+						};
+					}]);
+			</script>
 	</body>
 
 </html>

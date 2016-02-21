@@ -1,35 +1,42 @@
 <!doctype html>
 <html ng-app="myApp">
-<head>
-  <script src="/learn-angular/app/bower_components/angular/angular.js"></script>
-</head>
-<body>
 
+	<head>
+		<meta charset="UTF-8"/>
+		<title>isolate ： 独立的，隔离的</title>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+	</head>
 
-  <div ng-init="myProperty = 'wow, this is cool'"></div>
-  Surrounding scope: {{ myProperty }}
-  <div my-inherit-scope-directive="SomeController">
-    Inside an directive with inherited scope: {{ myProperty }}
-  </div>
-  <div my-directive>
-    Inside myDirective, isolate scope: {{ myProperty }}
-  <div>
+	<body>
 
-  <script>
-    angular.module('myApp', [])
-    .directive('myDirective', function() {
-      return {
-        restrict: 'A',
-        scope: {}
-      };
-    })
-    .directive('myInheritScopeDirective', function() {
-      return {
-        restrict: 'A',
-        scope: true
-      };
-    })
-  </script>
+		<div ng-init="myProperty = 'wow, this is cool'"></div>
+		Surrounding scope: {{ myProperty }}
+		<div my-inherit-scope-directive="SomeController">
+			Inside an directive with inherited scope: {{ myProperty }}
+		</div>
+		<div my-directive>
+			Inside myDirective, isolate scope: {{ myProperty }}
+		</div>
 
-</body>
+		<script>
+			/**
+			 * scope 似乎并没有对结果产生影响
+			 */
+			angular.module('myApp', [])
+				.directive('myDirective', function() {
+					return {
+						restrict: 'A',
+						scope: {}
+					};
+				})
+				.directive('myInheritScopeDirective', function() {
+					return {
+						restrict: 'A',
+						scope: true
+					};
+				});
+		</script>
+
+	</body>
+
 </html>
