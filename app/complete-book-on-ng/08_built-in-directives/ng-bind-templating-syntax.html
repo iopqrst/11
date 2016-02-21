@@ -5,12 +5,16 @@
 		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
 	</head>
 
-	<body ng-init="greeting = 'Hello World'">
+	<body>
 
-		{{ greeting }}
+		<div ng-bind-template="{{message}}{{name}}"></div>
 
 		<script>
 			angular.module('myApp', [])
+				.run(function($rootScope){ 
+					$rootScope.message = "this is message content";
+					$rootScope.name = "jim";
+				});
 		</script>
 
 	</body>

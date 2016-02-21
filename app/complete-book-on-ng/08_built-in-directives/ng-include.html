@@ -1,0 +1,26 @@
+<!doctype html>
+<html ng-app="myApp">
+
+	<head>
+		<meta charset="UTF-8"/>
+		<title>没有运行出效果？ what happen?</title>
+		<link rel="stylesheet" href="http://cdn.jsdelivr.net/foundation/4.3.2/css/foundation.min.css">
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+	</head>
+
+	<body>
+
+		<div ng-include="demo.html" ng-controller="MyController" ng-init="name = 'World'">
+			Hello {{ name }}
+		</div>
+
+		<script>
+			angular.module('myApp', [])
+				.controller('MyController', function($scope){
+					$scope.name = 'jane';
+				});
+		</script>
+
+	</body>
+
+</html>

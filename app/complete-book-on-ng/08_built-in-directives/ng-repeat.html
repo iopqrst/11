@@ -20,13 +20,19 @@
 
 		<ul ng-controller="PeopleController">
 			<li ng-repeat="person in people" ng-class="{even: !$even, odd: !$odd}">
-				{{person.name}} lives in {{person.city}}
+				{{$index}} | {{person.name}} lives in {{person.city}}
 			</li>
 			
 			<br />
 			
 			<li ng-repeat="person in people" ng-class="{even: $even, odd: $odd}">
-				{{person.name}} lives in {{person.city}}
+				{{$index}} | {{person.name}} lives in {{person.city}}
+			</li>
+			
+			<br />
+			
+			<li ng-repeat="(index, object) in people">
+				{{index}} | {{ object.name }}
 			</li>
 		</ul>
 

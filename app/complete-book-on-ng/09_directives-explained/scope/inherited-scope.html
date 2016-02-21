@@ -7,23 +7,23 @@
 
 	<body>
 
-		<div ng-app="myApp" ng-init="someProperty = 'some data'"></div>
-		<div ng-init="siblingProperty = 'more data'">
-			Inside Div Two: {{ aThirdProperty }}
+		<div ng-app="myApp" ng-init="someProperty = 'some data'">
+			<div ng-init="siblingProperty = 'more data'">
+				第2层DIV: {{ aThirdProperty }}
 
-			<div ng-init="aThirdProperty = 'data for 3rd property'" ng-controller="SomeController">
-				Inside Div Three: {{ aThirdProperty }}
+				<div ng-init="aThirdProperty = '属性3内容'" ng-controller="SomeController">
+					第3层DIV: {{ aThirdProperty }}
 
-				<div ng-controller="SecondController">
-					Inside Div Four: {{ aThirdProperty }}
-					<br> Outside myDirective: {{ myProperty }}
-					<div my-directive ng-init="myProperty = 'wow, this is cool'">
-						Inside myDirective: {{ myProperty }}
+					<div ng-controller="SecondController">
+						第4层DIV: {{ aThirdProperty }}
+						<br> 指令外部: {{ myProperty }}
+						<div my-directive ng-init="myProperty = 'wow, this is cool'">
+							指令内部: {{ myProperty }}
+						</div>
 					</div>
+
 				</div>
-
 			</div>
-
 		</div>
 
 		<script>
@@ -33,11 +33,14 @@
 				})
 				.controller('SecondController', function($scope) {
 					// also can be empty
+					
+//					$scope.aThirdProperty = 'asdfa';
 				})
 				.directive('myDirective', function() {
 					return {
 						restrict: 'A',
-						scope: true // 请修改一下scope的值，看一下"Outside myDirective"对应的值
+						//如果要创建一个能够从外部原型继承作用域的指令，将scope属性设置为true ( scope 默认值为 false )
+						scope: true // 请修改一下scope的值，看一下"指令外部"对应的值
 					}
 				});
 		</script>
