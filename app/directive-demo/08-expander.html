@@ -1,0 +1,32 @@
+<!doctype html>
+<html ng-app="app">
+
+	<head>
+		<title>directive</title>
+		<style type="text/css">
+
+		</style>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+	</head>
+
+	<body>
+
+		<div ng-controller="MyController">
+			<expander class="expander" expander-title="title">{{text}}</expander>
+		</div>
+
+		<script>
+			var app = angular.module('app', []);
+			app.controller('MyController', ['$scope', function($scope) {
+			}]);
+			app.directive('expander', function() {
+				return {
+					restrict: 'AE',
+					link: function(scope, element, attrs, someController) { //someController 为控制器或所依赖的控制器
+					}
+				};
+			});
+		</script>
+	</body>
+
+</html>

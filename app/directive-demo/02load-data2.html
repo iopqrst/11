@@ -1,0 +1,54 @@
+<!doctype html>
+<html ng-app="app">
+
+	<head>
+		<title>directive</title>
+		<style type="text/css">
+
+		</style>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+	</head>
+
+	<body>
+		
+		<div ng-controller="MyController">
+			<loader loadMethod="loadingList()">单击加载数据111111</loader>
+		</div>
+		
+		<div ng-controller="MyController2">
+			<loader loadMethod="loadingDetail()">单击加载数据222222</loader>
+		</div>
+		
+		<script>
+			var app = angular.module('app',[]);
+			
+			app.controller('MyController',['$scope', function($scope){
+				$scope.loadingList = function(){
+					console.info ('loading data .... ');
+				}
+			}]);
+			
+			app.controller('MyController2',['$scope', function($scope){
+				$scope.loadingDetail = function(){
+					console.info ('loading data 2 .... ');
+				}
+			}]);
+			
+			// 指令一般作为一个共有的“方法”存在，
+			// 得适合各种情况，当页面存在两个loader 指令的时候，加载数据需要调用不同的方法
+			// 此时着用用法在描述的场景下将不在适用。
+			
+			app.directive('loader',function(){
+				return {
+					restrict : 'AE',
+					link : function(scope, element, attrs, someController) { //someController 为控制器或所依赖的控制器
+						element.bind('click',function(){
+							scope.$apply(attrs.loadmethod);  // 注意这里变成小写了
+						});
+					}
+				};
+			});
+		</script>
+	</body>
+
+</html>

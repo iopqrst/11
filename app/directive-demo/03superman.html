@@ -1,0 +1,83 @@
+<!doctype html>
+<html ng-app="app">
+
+	<head>
+		<title>directive</title>
+		<style type="text/css">
+			.redBg {
+				background: #FF0000;
+				padding: 5px;
+				margin: 10px;
+				height: 40px;
+				line-height: 40px;
+				font-weight: bold;
+				font-size: 16px;
+				color: #FFFFFF;
+			}
+		</style>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+	</head>
+
+	<body>
+
+		<div>
+			<div superman strength> strength </div>
+			<div superman strength speed> strength speed </div>
+			<div superman strength speed light> strength speed light</div>
+		</div>
+
+		<script>
+			var app = angular.module('app', []);
+			app.directive('superman', function() {
+				return {
+					scope: {}, // 如果不是独立作用域会怎么样呢？
+					restrict: 'AE',
+					controller: function($scope) {
+						$scope.abilities = [];
+						// 下面的几个方法只有添加在this上才会生效，否则报错
+						this.addStrength = function() {
+							$scope.abilities.push('strength');
+						}
+						this.addSpeed = function() {
+							$scope.abilities.push('speed');
+						}
+						this.addLight = function() {
+							$scope.abilities.push('light');
+						}
+					},
+					link: function(scope, element, attrs, someController) {
+						element.addClass("redBg");
+						element.bind("mouseover", function() {
+							console.info('current abliities: ' + scope.abilities);
+						})
+					}
+				};
+			});
+			app.directive('strength', function() {
+				return {
+					require: '^superman',
+					link: function(scope, element, attrs, superController) {
+						superController.addStrength();
+					}
+				};
+			});
+			app.directive('speed', function() {
+				return {
+					require: '^superman',
+					link: function(scope, element, attrs, superController) {
+						superController.addSpeed();
+					}
+				};
+			});
+			app.directive('light', function() {
+				return {
+					require: '^superman',
+					link: function(scope, element, attrs, superController) {
+						superController.addLight();
+					}
+				};
+			});
+		</script>
+	</body>
+
+</html>
