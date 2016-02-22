@@ -1,0 +1,91 @@
+<!doctype html>
+<html ng-app="app">
+
+	<head>
+		<title>directive</title>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<style type="text/css">
+			.expander {
+				border: 1px solid #F0AD4E;
+			}
+			
+			.title {
+				background: #000000;
+				color: #fff;
+				height: 16px;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div ng-controller="MyController">
+			<accrodion>
+				<expander class="expander" ng-repeat="expander in expanders" expander-title='expander.title'>
+					{{expander.text}}
+				</expander>
+			</accrodion>
+		</div>
+
+		<script>
+			var app = angular.module('app', []);
+			app.controller('MyController', ['$scope', function($scope) {
+				$scope.expanders = [{
+					"title": "title 111111111",
+					"text": "text11111111111"
+				}, {
+					"title": "title 222222",
+					"text": "text 222222222"
+				}, {
+					"title": "title 3333333",
+					"text": "text 33333333"
+				}];
+			}]);
+			app.directive('accrodion', function() {
+				return {
+					restrict: 'AE',
+					replace: true,
+					transclude: true,
+					template: '<div ng-transclude></div>',
+					controller: function() {
+						var expanders = [];
+						this.gotOpened = function(currentExpander) {
+							angular.forEach(expanders, function(expander) {
+								if (currentExpander != expander) {
+									expander.showMe = false;
+								}
+							});
+						};
+						this.addExpander = function(expader) {
+							expanders.push(expader);
+						}
+					}
+				};
+			});
+			app.directive('expander', function() {
+				return {
+					restrict: 'AE',
+					replace: true,
+					transclude: true,
+					require: '^accrodion',
+					scope: {
+						title: '=expanderTitle' //注意与@时的区别（23行title)  至于什么区别我也不太懂
+					},
+					template: '<div>\
+							<div class="title" ng-click="toggle()">{{title}}></div>\
+							<div class="body" ng-show="showMe" ng-transclude></div>\
+						</div>',
+					link: function(scope, element, attrs, accrodionController) { //someController 为控制器或所依赖的控制器
+						scope.showMe = false;
+						accrodionController.addExpander(scope);
+						scope.toggle = function () {
+							scope.showMe = !scope.showMe;
+							accrodionController.gotOpened(scope);
+						}
+					}
+				};
+			});
+		</script>
+	</body>
+
+</html>
