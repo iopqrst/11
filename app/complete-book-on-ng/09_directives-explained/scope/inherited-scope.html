@@ -11,7 +11,7 @@
 			<div ng-init="siblingProperty = 'more data'">
 				第2层DIV: {{ aThirdProperty }}
 
-				<div ng-init="aThirdProperty = '属性3内容'" ng-controller="SomeController">
+				<div ng-init="aThirdProperty = '属性3内容'" ng-controller="FirstController">
 					第3层DIV: {{ aThirdProperty }}
 
 					<div ng-controller="SecondController">
@@ -28,13 +28,15 @@
 
 		<script>
 			angular.module('myApp', [])
-				.controller('SomeController', function($scope) {
+				.controller('FirstController', function($scope) {
 					// we can leave it empty, it just needs to be defined
 				})
 				.controller('SecondController', function($scope) {
 					// also can be empty
 					
 //					$scope.aThirdProperty = 'asdfa';
+
+					$scope.myProperty = "scope 为 true 时，这里的值不会修改指令的值，反之， 对吗，我也不知道";
 				})
 				.directive('myDirective', function() {
 					return {
