@@ -5,15 +5,15 @@ angular.module('myApp', ['ngRoute'])
 		.when('/', {
 			controller: 'HomeController',
 			template: '\
-        <a href="#inbox/ari">View Your Inbox</a>\
-      '
+				<a href="#inbox/ari">View Your Inbox</a>\
+			'
 		})
 		.when('/inbox/:name', {
 			controller: 'InboxController',
 			template: '\
-        <h1>Welcome to your inbox, {{ name }}</h1>\
-        <a href="#/">Back</a>\
-      '
+					<h1>Welcome to your inbox, {{ name }}</h1>\
+					<a href="#/">Back</a>\
+				'
 		})
 		.otherwise({
 			redirectTo: '/'
