@@ -1,0 +1,32 @@
+<!doctype html>
+<html >
+
+	<head>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+	</head>
+
+	<body>
+		
+		
+		<div ng-app="myApp" ng-init="greeting='Hello'; person='World'">
+			{{greeting}} {{person}} | {{name}}
+			
+			<span ng-init="name='hzq'">
+				asdfasf
+			</span>
+			
+		</div>
+			
+		<div>
+			{{greeting}} {{person}}
+		</div>
+		
+		
+
+		<script>
+			angular.module('myApp', []);
+		</script>
+
+	</body>
+
+</html>

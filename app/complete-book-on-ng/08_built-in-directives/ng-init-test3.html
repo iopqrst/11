@@ -1,0 +1,30 @@
+<!doctype html>
+<html ng-app="myApp">
+
+	<head>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+	</head>
+
+	<body>
+		<!--
+        	有没有 SomeController 会对结果产生影响
+        -->
+		<div ng-init="someProperty = 'some data'">
+			<div ng-init="siblingProperty='moredata'">
+				Inside Div Two: {{ aThirdProperty }}
+				<div ng-init="aThirdProperty = 'data for 3rd property'" ng-controller="SomeController">
+					Inside Div Three: {{ aThirdProperty }}
+					<div ng-init="aFourthProperty">
+						Inside Div Four: {{ aThirdProperty }}
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			angular.module('myApp', []);
+		</script>
+
+	</body>
+
+</html>
