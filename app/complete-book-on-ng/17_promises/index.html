@@ -1,49 +1,51 @@
 <!doctype html>
 <html ng-app="myApp">
-<head>
-  <link rel="stylesheet" href="http://cdn.jsdelivr.net/foundation/4.3.2/css/foundation.min.css">
-  <script src="/learn-angular/app/bower_components/angular/angular.js"></script>
-</head>
-<body>
 
-  <h1>Open Pull Requests for Angular JS</h1>
+	<head>
+		<link rel="stylesheet" href="http://cdn.jsdelivr.net/foundation/4.3.2/css/foundation.min.css">
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+	</head>
 
-  <ul ng-controller="DashboardController">
-    <li ng-repeat="pr in pullRequests">
-      {{ pr.title }}
-    </li>
-  </ul>
+	<body>
 
-  <script>
-    angular.module('myApp', [])
+		<h1>Open Pull Requests for Angular JS</h1>
 
-    .controller('DashboardController', [
-      '$scope', 'GithubService',
-        function($scope, GithubService) {
-          $scope.pullRequests = GithubService.getPullRequests();
-    }])
+		<ul ng-controller="DashboardController">
+			<li ng-repeat="pr in pullRequests">
+				{{ pr.title }}
+			</li>
+		</ul>
 
-    .factory('GithubService', [
-      '$q', '$http',
-        function($q, $http) {
-          var getPullRequests = function() {
-            var deferred = $q.defer();
-            // Get list of open angular js pull requests from github
-            $http.get('https://api.github.com/repos/angular/angular.js/pulls')
-            .success(function(data) {
-              deferred.resolve(data);
-            })
-            .error(function(reason) {
-              deferred.reject(reason);
-            })
-            return deferred.promise;
-          }
+		<script>
+			angular.module('myApp', [])
+				.controller('DashboardController', [
+					'$scope', 'GithubService',
+					function($scope, GithubService) {
+						$scope.pullRequests = GithubService.getPullRequests();
+					}
+				])
+				.factory('GithubService', [
+					'$q', '$http',
+					function($q, $http) {
+						var getPullRequests = function() {
+							var deferred = $q.defer();
+							// Get list of open angular js pull requests from github
+							$http.get('https://api.github.com/repos/angular/angular.js/pulls')
+								.success(function(data) {
+									deferred.resolve(data);
+								})
+								.error(function(reason) {
+									deferred.reject(reason);
+								})
+							return deferred.promise;
+						}
+						return {
+							getPullRequests: getPullRequests
+						};
+					}
+				]);
+		</script>
 
-          return {
-            getPullRequests: getPullRequests
-          };
-    }]);
-  </script>
+	</body>
 
-</body>
 </html>
