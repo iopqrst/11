@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="firstModule">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+	</head>
+
+	<body ng-controller="HelloController">
+
+		<script>
+			var module = angular.module('firstModule', []);
+			module.controller('HelloController', ['$scope', '$timeout', function($scope, $timeout) {
+				$scope.pager = {
+					pageSize: 10,
+					pageNo: 1
+				};
+				var watch = $scope.$watch(function() {
+					return $scope.pager.pageSize + '' + $scope.pager.pageNo;
+				}, function(newValue, oldValue, scope) {
+					console.log('监控的值发生变化了，可以在这里处理一些逻辑 ： newValue = ' + newValue + ',oldValue = ' + oldValue);
+					
+					console.info (scope.pager);
+				});
+				$timeout(function() {
+					$scope.pager.pageNo = 2;
+				}, 1000);
+				$timeout(function() {
+					$scope.pager.pageSize = 13;
+				}, 6000);
+			}]);
+		</script>
+	</body>
+
+</html>
