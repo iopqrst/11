@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="firstModule">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+	</head>
+
+	<body ng-controller="HelloController">
+		// (c) Copyright 2016 Administrator. All Rights Reserved. 
+		// https://segmentfault.com/a/1190000000402555 参考文章
+		<script>
+			var module = angular.module('firstModule', []);
+			module.controller('HelloController', ['$scope', '$q', '$log', function($scope, $q, $log) {
+				var deferred = $q.defer();
+				deferred.resolve(1);
+				var promiseA = deferred.promise;
+				promiseA
+					.then(function(val) {
+						$log.info(val);
+						return $q.reject(15);
+						//						return ++val;
+					})
+					.then(function(val) {
+						$log.info('here 1 : ' + val);
+						return ++val;
+					})
+					.then(function(val) {
+						$log.info('here 2 : ' + val);
+						return ++val;
+					})
+					.then(function(val) {
+						$log.info('here 3 : ' + val);
+						return ++val;
+					})
+					.then(
+						function(val) {
+							$log.info('here 4 : ' + val);
+							return ++val;
+						},
+						function(val) {
+							$log.info('here 5 : ' + val)
+						}
+					);
+			}]);
+			//链式调用完成后控制台打印出 1,15,可以看出，第一个return $q.reject(15)之后，直到最后一个then()才有错误回调函数，所以异常一直传递到最后，中间的几个then()没有错误回调函数。
+			//链式调用内部的默认失败回调会向后传递异常，所以为避免麻烦，且不在意每一处的业务逻辑错误，不要在每一处then() 处声明异常处理函数，在最后一个 then()中声明即可。
+		</script>
+	</body>
+
+</html>
