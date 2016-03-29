@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="com.study">
+
+	<head>
+		<meta charset="utf-8" />
+
+		<title>试验</title>
+
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<script src="/learn-angular/app/bower_components/jquery/dist/jquery.min.js"></script>
+
+	</head>
+
+	<body>
+		<div ng-controller="BoxCtrl" style="border: 1px solid green; width: 200px;">
+			<div style="width: 100px; height: 100px; background-color: red;" ng-click="click()"></div>
+			<p>{{ w }} x {{ h }}</p>
+			<p>W: <input type="text" ng-model="w" /></p>
+			<p>H: <input type="text" ng-model="h" /></p>
+		</div>
+
+		<script type="text/javascript" charset="utf-8">
+			var app = angular.module('com.study', []);
+			app.controller('BoxCtrl', ['$scope', function($scope) {
+				//$element 就是一个 jQuery 对象
+				var e = angular.element(document).find('div').eq(0);
+				console.info ( e );
+				$scope.w = e.css('width');
+				$scope.h = e.css('height');
+				
+				$scope.click = function() {
+					$scope.w = parseInt($scope.w) + 10;
+					$scope.h = parseInt($scope.h) + 10;
+				}
+				$scope.$watch('w',
+					function(newVal, oldVal) {
+						console.info ( newVal );
+						e.css("width",newVal);
+					}
+				);
+				$scope.$watch('h',
+					function(newVal, oldVal) {
+						console.info ( newVal );
+						e.css({'height':newVal});
+					}
+				);
+			}]);
+		</script>
+	</body>
+
+</html>
