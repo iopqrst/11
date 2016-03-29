@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="firstModule">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+	</head>
+
+	<body ng-controller="HelloController">
+
+		参考文章：http://blog.csdn.net/salmonellavaccine/article/details/38741743
+		<script>
+			var module = angular.module('firstModule', []);
+			module.controller('HelloController', ['$scope', '$q', '$log', function($scope, $q, $log) {
+				var deferred = $q.defer(),
+					p = deferred.promise;
+				p.then(
+					null,
+					function() {
+						console.log('a');
+						return $q.reject()
+					}
+				).then(
+					null,
+					function() {
+						console.log('b');
+						return $q.reject()
+					}
+				);
+				/*
+				 * 这样，调用 deferred.reject() 的结果就是 a b 了。
+				 */
+				deferred.reject();
+			}]);
+		</script>
+	</body>
+
+</html>

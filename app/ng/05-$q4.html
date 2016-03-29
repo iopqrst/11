@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="firstModule">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+	</head>
+
+	<body ng-controller="HelloController">
+
+		参考文章：http://blog.csdn.net/salmonellavaccine/article/details/38741743
+		<script>
+			var module = angular.module('firstModule', []);
+			module.controller('HelloController', ['$scope', '$q', '$log', function($scope, $q, $log) {
+				
+				var defer = $q.defer(),
+					p1 = defer.promise;
+
+				var p2 = p1.then(
+					function(value) {
+						console.log('here1 =' + value);
+						return value + 1;
+					},
+					function(value) {
+						console.log('here2 = a');
+						return 'first a';
+					}
+				).then(
+					function(value) {
+						console.log('here3' + value);
+						return value + '' + value;
+					},
+					function(value) {
+						console.log('b')
+						return value;
+					}
+				);
+				
+				p2.then(
+					function(value) {
+						console.log("then 2:" + value);
+						return value;
+					},
+					function(value) {
+						console.log('c')
+					}
+				);
+				
+				defer.reject('a');
+			}]);
+		</script>
+	</body>
+
+</html>

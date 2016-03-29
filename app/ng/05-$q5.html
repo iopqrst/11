@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="firstModule">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+	</head>
+
+	<body ng-controller="HelloController">
+
+		参考文章：http://blog.csdn.net/salmonellavaccine/article/details/38741743
+		<script>
+			var module = angular.module('firstModule', []);
+			module.controller('HelloController', ['$scope', '$q', '$log', function($scope, $q, $log) {
+				
+				var deferred = $q.defer(),
+					p = deferred.promise;
+				
+				p.then(
+					null,
+					null,
+					function(data) {
+						console.log(0)
+					}
+				).then(
+					null,
+					null,
+					function(data) {
+						console.log(1)
+					}
+				);
+				/*
+				 * 通知回调函数得通过调用 notify() 触发。
+				 * 像这样调用两次就会看到两次 0 1
+				 */
+				deferred.notify();
+				deferred.notify();
+			}]);
+		</script>
+	</body>
+
+</html>

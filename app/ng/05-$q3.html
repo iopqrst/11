@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="firstModule">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+	</head>
+
+	<body ng-controller="HelloController">
+
+		参考文章：http://blog.csdn.net/salmonellavaccine/article/details/38741743
+		<script>
+			var module = angular.module('firstModule', []);
+			module.controller('HelloController', ['$scope', '$q', '$log', function($scope, $q, $log) {
+				
+				var defer = $q.defer(),
+					p1 = defer.promise;
+
+				var p2 = p1.then(
+					function(value) {
+						console.log(value);
+						return value + 1;
+					},
+					function(value) {
+						console.log('a')
+					}
+				).then(
+					function(value) {
+						console.log(value);
+						return value + 1;
+					},
+					function(value) {
+						console.log('b')
+					}
+				);
+				p2.then(
+					function(value) {
+						console.log(value);
+						return value + 1;
+					},
+					function(value) {
+						console.log('c')
+					}
+				);
+				
+				// 1 2 3
+				defer.resolve(1);
+				// 只执行一次，下面的这次不再执行  (查看05-$q5 通知函数)
+				defer.resolve(1);
+			}]);
+		</script>
+	</body>
+
+</html>
