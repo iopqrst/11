@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="com.study">
+
+	<head>
+		<meta charset="utf-8" />
+
+		<title>order by</title>
+
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<script src="/learn-angular/app/bower_components/angular-route/angular-route.js"></script>
+		<script src="/learn-angular/app/bower_components/jquery/dist/jquery.min.js"></script>
+		<style type="text/css"></style>
+	</head>
+
+	<body>
+		<div ng-view></div>
+
+		<script type="text/javascript">
+			var app = angular.module('com.study', ['ngRoute'], function($routeProvider) {
+				$routeProvider.when('/book/:title', {
+					template: '<b>{{ title }}</b>',
+					controller: function($scope, $routeParams) {
+						$scope.title = $routeParams.title;
+					}
+				});
+			});
+			
+			// 访问 ： xxx#/book/testg.afdas;dfj
+		</script>
+	</body>
+
+</html>

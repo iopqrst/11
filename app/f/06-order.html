@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="com.study">
+
+	<head>
+		<meta charset="utf-8" />
+
+		<title>order by</title>
+
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<script src="/learn-angular/app/bower_components/jquery/dist/jquery.min.js"></script>
+		<style type="text/css"></style>
+	</head>
+
+	<body>
+		<div ng-controller="TestController">
+			<table>
+				<tr>
+					<th ng-click="f='name'; rev=!rev">名字</th>
+					<th ng-click="f='age'; rev=!rev">年龄</th>
+				</tr>
+
+				<tr ng-repeat="o in data | orderBy: f : rev">
+					<td>{{ o.name }}</td>
+					<td>{{ o.age }}</td>
+				</tr>
+			</table>
+		</div>
+
+		<script type="text/javascript">
+			var app = angular.module('com.study', []);
+			app.controller('TestController', ['$scope', function($scope) {
+				$scope.data = [{
+					name: 'B',
+					age: 4
+				}, {
+					name: 'A',
+					age: 1
+				}, {
+					name: 'D',
+					age: 3
+				}, {
+					name: 'C',
+					age: 3
+				}, ];
+			}]);
+		</script>
+	</body>
+
+</html>
