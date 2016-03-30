@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="com.study">
+
+	<head>
+		<meta charset="utf-8" />
+
+		<title>ng-repeat + ng-class </title>
+
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<script src="/learn-angular/app/bower_components/jquery/dist/jquery.min.js"></script>
+		<style type="text/css">
+			.odd {
+				background-color: red;
+			}
+			
+			.even {
+				background-color: green;
+			}
+		</style>
+	</head>
+
+	<body>
+		<ul ng-init="l=[1,2,3,4]">
+			<li ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="m in l">{{ m }}</li>
+		</ul>
+		
+		<script>
+			var app = angular.module('com.study', []);
+		</script>
+	</body>
+
+</html>

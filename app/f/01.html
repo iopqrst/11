@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="com.study">
+<html>
 
 	<head>
 		<meta charset="utf-8" />
@@ -20,31 +20,17 @@
 		</div>
 
 		<script type="text/javascript" charset="utf-8">
+			/**
+			 * 启动方式
+			 */
 			var app = angular.module('com.study', []);
 			app.controller('BoxCtrl', ['$scope', function($scope) {
-				//$element 就是一个 jQuery 对象
-				var e = angular.element(document).find('div').eq(0);
-				console.info ( e );
-				$scope.w = e.css('width');
-				$scope.h = e.css('height');
-				
-				$scope.click = function() {
-					$scope.w = parseInt($scope.w) + 10;
-					$scope.h = parseInt($scope.h) + 10;
-				}
-				$scope.$watch('w',
-					function(newVal, oldVal) {
-						console.info ( newVal );
-						e.css("width",newVal);
-					}
-				);
-				$scope.$watch('h',
-					function(newVal, oldVal) {
-						console.info ( newVal );
-						e.css({'height':newVal});
-					}
-				);
+				console.info ('here --- ');
+				$scope.w = 100;
+				$scope.h = 100;
 			}]);
+			
+			angular.bootstrap(document, ['com.study']);
 		</script>
 	</body>
 

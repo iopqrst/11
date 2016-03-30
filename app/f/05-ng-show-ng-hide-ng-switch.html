@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="com.study">
+
+	<head>
+		<meta charset="utf-8" />
+
+		<title>ng-show ng-hide ng-switch</title>
+
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<script src="/learn-angular/app/bower_components/jquery/dist/jquery.min.js"></script>
+		<style type="text/css">
+			.odd {
+				background-color: red;
+			}
+			
+			.even {
+				background-color: green;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div ng-show="true">1</div>
+		<div ng-show="false">2</div>
+		<div ng-hide="true">3</div>
+		<div ng-hide="false">4</div>
+
+		<div ng-init="a=2">
+			<ul ng-switch on="a">
+				<li ng-switch-when="1">switch - 1</li>
+				<li ng-switch-when="2">switch - 2</li>
+				<li ng-switch-default>switch - other</li>
+			</ul>
+		</div>
+		<script>
+			var app = angular.module('com.study', []);
+		</script>
+	</body>
+
+</html>

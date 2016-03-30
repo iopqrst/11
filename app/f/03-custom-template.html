@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="com.study">
+
+	<head>
+		<meta charset="utf-8" />
+
+		<title>定义模板</title>
+
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<script src="/learn-angular/app/bower_components/jquery/dist/jquery.min.js"></script>
+
+	</head>
+
+	<body>
+		<div ng-include src="'tpl.html'">
+		</div>
+
+		<div ng-include="'tpl.html'">
+		</div>
+
+		<script>
+			var app = angular.module('com.study', []);
+		</script>
+	</body>
+
+</html>
