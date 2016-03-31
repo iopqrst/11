@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="firstModule">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+	</head>
+
+	<body ng-controller="HelloController">
+		<script>
+			//provider 是被“注入控制器”使用的一个对象，注入机制通过调用一个 provider 的 $get() 方法，
+			//把得到的东西作为参数进行相关调用（比如把得到的服务作为一个 Controller 的参数）。
+			var pp = function() {
+				this.$get = function() {
+					return {
+						'haha': '123'
+					};
+				}
+			};
+			var pp2 = function() {
+				this.$get = function() {
+					return function(data) {
+						alert('data = ' + data);
+					}
+				}
+			};
+			var module = angular.module('firstModule', [], function($provide) {
+				$provide.provider('PP', pp2);
+			});
+			module.controller('HelloController', ['$scope', 'PP', function($scope, PP) {
+				console.log(PP('hello ~~'));
+				//console.log(PP);
+			}]);
+		</script>
+	</body>
+
+</html>

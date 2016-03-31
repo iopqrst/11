@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="firstModule">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+	</head>
+
+	<body ng-controller="HelloController">
+
+		<script>
+			var module = angular.module('firstModule', []);
+			module.controller('HelloController', ['$scope', '$q', function($scope, $q) {
+				var defer = $q.defer();
+				var promise = defer.promise;
+				promise.then(function(data) {
+						alert('ok, ' + data)
+					},
+					function(data) {
+						alert('error, ' + data)
+					});
+				defer.reject('xx');
+//				defer.resolve('xx');
+			}]);
+		</script>
+	</body>
+
+</html>

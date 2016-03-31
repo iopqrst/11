@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="firstModule">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+	</head>
+
+	<body ng-controller="HelloController">
+		<script>
+			var module = angular.module('firstModule', []);
+			module.controller('HelloController', ['$scope', '$q', '$log', function($scope, $q, $log) {
+				var p = $q.when(1, function(data) {
+						return data;
+					},
+					function(data) {
+						return data;
+					});
+				p.then(
+					function(data) {
+						console.log('ok, ' + data);
+					},
+					function(data) {
+						console.log('error, ' + data);
+					}
+				);
+			}]);
+		</script>
+	</body>
+
+</html>
