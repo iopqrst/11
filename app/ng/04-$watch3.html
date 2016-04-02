@@ -19,7 +19,8 @@
 				var watch = $scope.$watch(function() {
 					return $scope.pager.pageSize + '' + $scope.pager.pageNo;
 				}, function(newValue, oldValue, scope) {
-					console.log('监控的值发生变化了，可以在这里处理一些逻辑 ： newValue = ' + newValue + ',oldValue = ' + oldValue);
+					console.log('监控的值发生变化了，可以在这里处理一些逻辑 ： newValue = ' 
+						+ newValue + ',oldValue = ' + oldValue);
 					
 					console.info (scope.pager);
 				});

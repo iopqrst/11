@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="Demo">
+
+	<head>
+		<meta charset="utf-8" />
+		<title>AngularJS</title>
+	</head>
+
+	<body>
+
+		<div ng-controller="TestCtrl">
+			<span ng-click="go()">{{ a }}</span>
+		</div>
+
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<script src="/learn-angular/app/bower_components/angular-route/angular-route.js"></script>
+		<script src="/learn-angular/app/bower_components/jquery/dist/jquery.min.js"></script>
+
+		<script type="text/javascript">
+			var app = angular.module('Demo', [], angular.noop);
+			app.controller('TestCtrl', function($scope, $timeout) {
+				$scope.a = '点击我开始';
+				var defer = $.Deferred();
+				var f = function() {
+					if ($scope.a == '') {
+						$scope.a = '已停止';
+						return
+					}
+					defer.done(function(data) {
+						console.info ( 'here 2 ------' + data);
+						$scope.a.length < 10 ? $scope.a += '>' : $scope.a = '>';
+						$timeout(f, 100);
+					});
+				}
+				defer.done(function(data) {
+					console.info ( 'here 1 ----' + data);
+					$scope.a = '>';
+					f()
+				});
+				$scope.go = function() {
+					defer.resolve('paras~~~');
+					$timeout(function() {
+						$scope.a = ''
+					}, 5000);
+				}
+			});
+		</script>
+	</body>
+
+</html>
