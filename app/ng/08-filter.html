@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+	<head>
+
+	</head>
+
+	<body>
+		<ul ng-controller="HelloController">
+			<li ng-repeat="stu in data"><span ng-bind="stu.name | map"></span></li>
+		</ul>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<script type="text/javascript">
+			var app = angular.module('myApp', [], angular.noop);
+			app.filter('map', function() {
+				var filter = function(input) {
+					return input + ' 思密达';
+				};
+				return filter;
+			});
+			app.controller('HelloController', ['$scope', function($scope) {
+				$scope.data = [{
+					name: "zhangsna",
+					gender: 0
+				}, {
+					name: "lisi",
+					gender: 0
+				}, {
+					name: "zhaomin",
+					gender: 1
+				}];
+			}]);
+		</script>
+	</body>
+
+</html>

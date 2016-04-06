@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+	<head>
+
+	</head>
+
+	<body>
+		<ul ng-controller="HelloController">
+			<p>示例数据: {{ a|map:map_value:'>>':'(no)' }}</p>
+			<p>示例数据: {{ b|map:map_value:'>>':'(no)' }}</p>
+		</ul>
+
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<script type="text/javascript">
+			var app = angular.module('myApp', [], angular.noop);
+			app.filter('map', function() {
+				var filter = function(input, map_value, append, default_value) {
+					var r = map_value[input];
+					if (r === undefined) {
+						return default_value + append
+					} else {
+						return r + append
+					}
+				};
+				return filter;
+			});
+			app.controller('HelloController', ['$scope', function($scope) {
+				$scope.map_value = {
+					a: '一',
+					b: '二',
+					c: '三'
+				}
+				$scope.a = 'a';
+			}]);
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+	<head>
+
+	</head>
+
+	<body>
+		<ul ng-controller="HelloController">
+			<p>示例数据: {{ a | map:'参数1':'参数1.1':'参数1.1.1':'...' }}</p>
+			<p>示例数据: {{ b | map:'参数2':'参数2.1':'参数2.1.1':'...' }}</p>
+		</ul>
+
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<script type="text/javascript">
+			var app = angular.module('myApp', [], angular.noop);
+			app.filter('map', function() {
+				var filter = function(input, param1, param2, param3, param4) {
+					return "input = " + input + ", params = " + param1 + param2 + param3 + param4;
+				};
+				return filter;
+			});
+			app.controller('HelloController', ['$scope', function($scope) {
+				$scope.a = 'aaaaaa';
+				$scope.b = 'bbbbbb';
+			}]);
+		</script>
+	</body>
+
+</html>

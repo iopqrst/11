@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+	<head>
+
+	</head>
+
+	<body>
+		<ul ng-controller="HelloController">
+			<li ng-repeat="stu in data">{{stu.name}} + <span ng-bind="stu.gender | genderFilter"></span></li>
+		</ul>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<script type="text/javascript">
+			var app = angular.module('myApp', [], angular.noop);
+			
+			app.filter('genderFilter', function() {
+				var filter = function(input) {
+					return input === 0 ? "男" : "女";
+				};
+				return filter;
+			});
+			
+			app.controller('HelloController', ['$scope', function($scope){
+				$scope.data = [{
+					name : "zhangsna",
+					age : 28,
+					gender : 0
+				},{
+					name : "lisi",
+					age : 43,
+					gender : 0
+				},{
+					name : "zhaomin",
+					age : 26,
+					gender : 1
+				}];
+			}]);
+		</script>
+	</body>
+
+</html>
