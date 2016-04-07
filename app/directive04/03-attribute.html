@@ -1,0 +1,31 @@
+<!doctype html>
+<html ng-app="app">
+
+	<head>
+		<title>directive</title>
+		<style type="text/css">
+
+		</style>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<script src="/learn-angular/app/bower_components/jquery/dist/jquery.js"></script>
+	</head>
+
+	<body>
+		<p color="red">有颜色的文本</p>
+		<color color="green">有颜色的文本</color>
+
+		<script>
+			var app = angular.module('app', []);
+			app.directive('color', function() {
+				var link = function($scope, $element, $attrs) {
+					$element.css('color', $attrs.color);
+				}
+				return {
+					link: link,
+					restrict: 'AE'
+				};
+			});
+		</script>
+	</body>
+
+</html>

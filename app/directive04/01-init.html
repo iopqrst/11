@@ -1,0 +1,36 @@
+<!doctype html>
+<html ng-app="app">
+
+	<head>
+		<title>directive</title>
+		<style type="text/css">
+
+		</style>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+	</head>
+
+	<body>
+
+		<div ng-controller="MyController">
+			<p show style="font-size: 12px;"></p>
+		</div>
+
+		<script>
+			var app = angular.module('app', []);
+			app.controller('MyController', ['$scope', function($scope) {
+				
+			}]);
+			
+			app.directive('show', function() {
+				var func = function($scope, $element, $attrs) {
+					console.log($scope);
+					console.log($element);
+					console.log($attrs);
+				}
+//				return func;
+				return {compile: function(){return func}}
+			});
+		</script>
+	</body>
+
+</html>

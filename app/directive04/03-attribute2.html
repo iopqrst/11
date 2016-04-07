@@ -1,0 +1,41 @@
+<!doctype html>
+<html ng-app="app">
+
+	<head>
+		<title>directive</title>
+		<style type="text/css">
+
+		</style>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<script src="/learn-angular/app/bower_components/jquery/dist/jquery.js"></script>
+	</head>
+
+	<body>
+
+		<div ng-controller="TestCtrl">
+			<p color="color" title="monkey-d">有颜色的文本</p>
+			<p color="'blue'">有颜色的文本</p>
+		</div>
+
+		<script>
+			var app = angular.module('app', []);
+			
+			app.controller('TestCtrl', function($scope) {
+				$scope.color = 'red';
+			});
+			
+			app.directive('color', function() {
+				var link = function($scope, $element, $attrs) {
+					$scope.$watch($attrs.color, function(new_v) {
+						$element.css('color', new_v);
+					});
+				}
+				return link;
+			});
+			
+			
+			// 这里引申出一个问题： ng 的执行过程  《慕课网-阿里云angularjs》 分享中有一节将到执行流程。
+		</script>
+	</body>
+
+</html>
