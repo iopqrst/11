@@ -1,0 +1,45 @@
+<!doctype html>
+<html ng-app="app">
+
+	<head>
+		<title>directive</title>
+		<style type="text/css">
+
+		</style>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<script src="/learn-angular/app/bower_components/jquery/dist/jquery.js"></script>
+	</head>
+
+	<body>
+
+		<ul sayhello=5>
+			<li>中国人坑中国人</li>
+		</ul>
+
+		<script>
+			var app = angular.module('app', []);
+			app.directive('sayhello', function() {
+				return {
+					restrict: 'A',
+					compile: function(el, attrs, transclude) {
+						console.info('enter compile ');
+						var tpl = el.children().clone();
+						console.info(' tpl ' + tpl + ", attrs.sayhello=" + attrs.sayhello);
+						for (var i = 0; i < attrs.sayhello - 1; i++) {
+							el.append(tpl.clone());
+						}
+						// compile 方法返回的是 link 函数
+						return function(scope, el, attrs, controller) {
+							console.info(' enter link fn ');
+						}
+					},
+					// 如果有compile则不会在执行link, 因为compile 返回的link 函数会被执行
+					link: function(scope, el, attrs, controller) {
+						console.info(' 两个 link 会执行哪一个？ ');
+					}
+				};
+			});
+		</script>
+	</body>
+
+</html>

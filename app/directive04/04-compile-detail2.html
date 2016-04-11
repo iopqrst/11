@@ -1,0 +1,44 @@
+<!doctype html>
+<html ng-app="app">
+
+	<head>
+		<title>directive</title>
+		<style type="text/css">
+
+		</style>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<script src="/learn-angular/app/bower_components/jquery/dist/jquery.js"></script>
+	</head>
+
+	<body>
+
+		<div ng-controller="TestCtrl"></div>
+		<div id="a">A {{ text }}</div>
+		<div id="b">B </div>
+
+		<script>
+			var app = angular.module('app', []);
+			
+			app.controller('TestCtrl', function($scope, $compile) {
+				var link = $compile($('#a'));
+				var scope = $scope.$new(true);
+				scope.text = '12345';
+				var node = link(scope, function(clone_element, scope) {
+					clone_element.text(clone_element.text() + ' ...'); //无效
+					clone_element.text('{{ text2 }}'); //无效
+					clone_element.addClass('new_class');
+				});
+				$('#b').append(node);
+			});
+			
+			//修改无效的原因是，像 {{ text }} 这种所谓的 Interpolate 在 $compile 中已经被处理过了，
+			//生成了相关函数（这里起作用的是 directive 中的一个 postLink 函数），后面执行 link 就是执行了 $compile 生成的这些函数。
+			//当然，如果你的文本没有数据变量的引用，那修改是会有效果的。
+			
+			
+			//link 函数是由 compile 函数返回的，也就像前面说的，
+			// 应该把改变 DOM 结构的逻辑放在 compile 函数中做, 放在link函数在某些情况下也试用，只是需要注意修改是否生效，比如上面的例子。
+		</script>
+	</body>
+
+</html>
