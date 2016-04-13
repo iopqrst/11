@@ -1,0 +1,46 @@
+<!doctype html>
+<html ng-app="app">
+
+	<head>
+		<title>directive</title>
+		<style type="text/css">
+
+		</style>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<script src="/learn-angular/app/bower_components/jquery/dist/jquery.js"></script>
+	</head>
+
+	<body>
+
+		<div ng-controller="TestCtrl">
+			<div show-length>{{ text }}</div>
+			<button ng-click="text='abcdefg'">改变</button>
+		</div>
+
+		<script>
+			var app = angular.module('app', []);
+			
+			app.controller('TestCtrl', function(){});
+			
+			app.directive('showLength', function($rootScope, $document) {
+				var func = function(element, attrs, link) {
+					return function(scope, ielement, iattrs, controller) {
+						var node = link(scope);
+						ielement.append(node);
+						var lnode = $('<span></span>');
+						ielement.prepend(lnode);
+						scope.$watch(function(scope) {
+							lnode.text(node.text().length);
+						});
+					};
+				}
+				return {
+					compile: func,
+					transclude: true, // element是节点没,其它值是节点的内容没
+					restrict: 'A'
+				};
+			});
+		</script>
+	</body>
+
+</html>
