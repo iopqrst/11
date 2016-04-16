@@ -1,0 +1,44 @@
+<!doctype html>
+<html ng-app="app">
+
+	<head>
+		<title>directive</title>
+		<script src="../bower_components/angular/angular.js"></script>
+	</head>
+
+	<body>
+
+		<div ng-controller="MyController">
+			<my-dialog>Check out the contents, {{name}}!</my-dialog>
+		</div>
+
+		<script>
+			var app = angular.module("app", []);
+			app.controller('MyController', ['$scope', function($scope) {
+				$scope.name = 'Tobias';
+			}]);
+			app.directive("myDialog", function() {
+				return {
+					restrict: 'E',
+					transclude: true,
+					scope: {},  //注释掉可以看一下效果
+					templateUrl: "directive-08-tpl.html",
+					link: function(scope, element) {
+						scope.name = 'Jeff';
+					}
+				}
+			});
+			
+			// 一般会认为{{name}}会被解析为Jeff，但运行结果还是Tobias，并非Jeff。
+			// transclude 选项改变了指令相互嵌套的方式，他使指令的内容拥有任何指令外部的作用域，而不是内部的作用域。
+			// 为了实现这一点，他给指令内容访问外部作用域的机会。
+			
+			//需要注意的是，如果指令不创建自己的scope（scope：false,或者省略）,然后在link函数里执行 scope.name = 'Jeff'; 
+			//很明显外部的scope 会受到影响，输出Jeff
+			
+			// 这样的行为对于包含内容的指令是非常有意义的。如果不这样的话你就的必须分别传入每个需要使用的数据模型。如果你需要传入每个要使用
+			// 的数据模型，那么你就无法做到适应各种不同内容的情况。
+		</script>
+	</body>
+
+</html>

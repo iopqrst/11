@@ -1,0 +1,68 @@
+<!doctype html>
+<html ng-app="app">
+
+	<head>
+		<title>directive drag</title>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
+	</head>
+
+	<body>
+
+		<my-tabs>
+			<my-pane title="Hello">
+				<h5 id="创建自定义指令_source_hello">Hello</h5>
+				<p>Lorem ipsum dolor sit amet</p>
+			</my-pane>
+			<my-pane title="World">
+				<h5 id="创建自定义指令_source_world">World</h5>
+				<em>Mauris elementum elementum enim at suscipit.</em>
+				<p><a href ng-init="i=0" ng-click="i = i + 1">counter: {{i}}</a></p>
+			</my-pane>
+		</my-tabs>
+
+		<script>
+			var app = angular.module('app', []);
+			app.directive('myTabs', function() {
+				console.info ( ' my tabs ~~ ');
+				return {
+					restrict: 'E',
+					transclude: true,
+					scope: {},
+					controller: function($scope) {
+						var panes = $scope.panes = [];
+						$scope.select = function(pane) {
+							angular.forEach(panes, function(pane) {
+								pane.selected = false;
+							});
+							pane.selected = true;
+						};
+						this.addPane = function(pane) {
+							if (panes.length == 0) {
+								$scope.select(pane);
+							}
+							panes.push(pane);
+						};
+					},
+					templateUrl: '11-tpl-tab.html'
+				};
+			})
+			.directive('myPane', function() {
+				console.info ( ' my pane ~~ ');
+				return {
+					require: '^myTabs',
+					restrict: 'E',
+					transclude: true,
+					scope: {
+						title: '@'
+					},
+					link: function(scope, element, attrs, tabsCtrl) {
+						tabsCtrl.addPane(scope);
+					},
+					templateUrl: '11-tpl-pane.html'
+				};
+			});
+		</script>
+	</body>
+
+</html>

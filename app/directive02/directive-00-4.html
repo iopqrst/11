@@ -1,0 +1,45 @@
+<!doctype html>
+<html ng-app="app">
+
+	<head>
+		<title>directive</title>
+		<script src="../bower_components/angular/angular.js"></script>
+	</head>
+
+	<body>
+
+		<div ng-controller="MyController">
+			<my-customer info="person1"></my-customer>
+			<hr />
+			<my-customer info="person2"></my-customer>
+		</div>
+
+		<script>
+			var app = angular.module("app", []);
+			app.controller('MyController', function($scope) {
+				$scope.person1 = {
+					name: 'Naomi',
+					address: '1600 Amphitheatre'
+				};
+				
+				$scope.person2 = {
+					name: 'Joker',
+					address: '大郊亭华腾国际'
+				};
+			});
+			
+			// 注意: 指令作用域选项中的'=attr'属性名是被规范化过后的名字. 
+			// 比如要绑定<div bind-to-this="thing">,你就要使用'=bindToThis'的绑定
+			app.directive("myCustomer", function() {
+				return {
+					restrict: 'AE',
+					scope: {
+						customer : '=info'
+					},
+					templateUrl: 'directive-00-2-tpl.html'
+				}
+			});
+		</script>
+	</body>
+
+</html>

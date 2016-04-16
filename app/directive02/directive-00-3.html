@@ -1,0 +1,49 @@
+<!doctype html>
+<html ng-app="app">
+
+	<head>
+		<title>directive</title>
+		<script src="../bower_components/angular/angular.js"></script>
+	</head>
+
+	<body>
+
+		<div ng-controller="NaomiCtrl">
+			<my-customer></my-customer>
+		</div>
+		<hr>
+		<div ng-controller="IgorCtrl">
+			<my-customer></my-customer>
+		</div>
+
+		<script>
+			var app = angular.module("app", []);
+			app.controller('NaomiCtrl', function($scope) {
+					$scope.customer = {
+						name: 'Naomi',
+						address: '1600 Amphitheatre'
+					};
+				})
+				.controller('IgorCtrl', function($scope) {
+					$scope.customer = {
+						name: 'Igor',
+						address: '123 Somewhere'
+					};
+				});
+			app.directive("myCustomer", function() {
+				return {
+					restrict: 'AE',
+					templateUrl: 'directive-00-2-tpl.html'
+				}
+			});
+			// 但是它有个致命的缺陷，我们在给定的作用域内仅能使用一次。
+			// 它现在的实现是，我们每次重用该指令的时候都要为它新创一个控制器.
+			// 这显然不是一个好的解决方案。
+			// 我们想要做的是能够把指令的作用域与外部的作用域隔离开来，
+			// 然后映射外部的作用域到指令内部的作用域。 
+			// 可以通过创建独立作用域(isolate scope)来达到这个目的。
+			// 我们可以使用指令的scope来选项它: 下一个页面
+		</script>
+	</body>
+
+</html>

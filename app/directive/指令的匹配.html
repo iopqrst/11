@@ -1,0 +1,48 @@
+<!doctype html>
+<html ng-app="app">
+
+	<head>
+		<title>directive</title>
+		<style>
+
+		</style>
+	</head>
+
+	<body>
+
+		
+		<div ng-controller="MyController">
+			Hello <input ng-model='name'>
+			<hr/>
+			<span ng-bind="name"></span> <br/>
+			<span ng:bind="name"></span> <br/>
+			<span ng_bind="name"></span> <br/>
+			<span data-ng-bind="name"></span> <br/>
+			<span x-ng-bind="name"></span> <br/>
+		</div>
+		
+		<pre style="color:red">
+			
+			//Angular把一个元素的标签和属性名字进行规范化，来决定哪个元素匹配哪个指令。 
+			
+			我们通常用区分大小写的规范化命名方式(比如ngModel)来识别指令。 
+			然而，HTML是区分大小的，所以我们在DOM中使用的指令只能用小写的方式命名， 
+			通常使用破折号间隔的形式(比如：ng-model).
+			
+			规范化的过程如下所示： 
+			从元素或属性的名字前面去掉x- and data- 
+			从:, -, 或 _分隔的形式转换成小驼峰命名法(camelCase).
+			
+		</pre>
+
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<script>
+			var app = angular.module('app', []);
+			
+			app.controller('MyController',  ['$scope', function($scope){
+				
+			}]) ;
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html ng-app="app">
+
+	<head>
+		<title>directive</title>
+		<script src="../bower_components/angular/angular.js"></script>
+	</head>
+
+	<body>
+
+		<div ng-controller="MyController">
+			<div my-customer></div>
+		</div>
+
+		<script>
+			var app = angular.module("app", []);
+			app.controller('MyController', ['$scope', function($scope) {
+				$scope.customer = {
+					name: 'Naomi',
+					address: '1600 Amphitheatre'
+				};
+			}]);
+			app.directive("myCustomer", function() {
+				return {
+					template: '姓名: {{customer.name}} 地址:{{customer.address}}'
+				}
+			});
+		</script>
+	</body>
+
+</html>

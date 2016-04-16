@@ -1,0 +1,32 @@
+<!doctype html>
+<html ng-app="app">
+
+	<head>
+		<title>directive</title>
+		<script src="../bower_components/angular/angular.js"></script>
+	</head>
+
+	<body>
+
+		<div ng-controller="MyController">
+
+			<my-dialog>Check out the contents, {{name}}!</my-dialog>
+
+		</div>
+
+		<script>
+			var app = angular.module("app", []);
+			app.controller('MyController', ['$scope', function($scope) {
+				$scope.name = 'Tobias';
+			}]);
+			app.directive("myDialog", function() {
+				return {
+					restrict: "AE",
+					transclude: true,
+					templateUrl: "directive-08-tpl.html"
+				}
+			});
+		</script>
+	</body>
+
+</html>

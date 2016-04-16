@@ -1,0 +1,34 @@
+<!doctype html>
+<html ng-app="app">
+
+	<head>
+		<title>directive</title>
+		<script src="../bower_components/angular/angular.js"></script>
+	</head>
+
+	<body>
+
+		<div ng-controller="MyController">
+			<div my-customer></div>
+
+			<my-customer></my-customer>
+		</div>
+
+		<script>
+			var app = angular.module("app", []);
+			app.controller('MyController', ['$scope', function($scope) {
+				$scope.customer = {
+					name: 'Naomi - tmp 2',
+					address: '1600 Amphitheatre tmp2'
+				};
+			}]);
+			app.directive("myCustomer", function() {
+				return {
+					restrict: 'AE',
+					templateUrl: 'directive-00-2-tpl.html'
+				}
+			});
+		</script>
+	</body>
+
+</html>

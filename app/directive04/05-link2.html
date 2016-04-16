@@ -1,0 +1,66 @@
+<!doctype html>
+<html ng-app="app">
+
+	<head>
+		<title>directive</title>
+		<style type="text/css">
+
+		</style>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+	</head>
+
+	<body>
+
+		<div ng-controller="MyController" id="s_box">
+			Date format: <input ng-model="format">
+			<hr/> Current time is: <span my-current-time="format"></span>
+		</div>
+
+		<script>
+			var app = angular.module('app', []);
+			app.controller('MyController', ['$scope', function($scope) {
+				$scope.format = 'yyyy-MM-dd HH:mm:ss';
+			}]);
+			app.directive('myCurrentTime', ['$timeout', 'dateFilter', function($timeout, dateFilter) {
+				function link(scope, element, attrs) {
+					var format,
+						timeoId;
+
+					function updateTime() {
+						element.text(dateFilter(new Date(), format));
+					};
+					scope.$watch(attrs.myCurrentTime, function(value) {
+						format = value;
+						updateTime();
+					});
+
+					function scheduleUpdate() {
+						// save the timeoutId for canceling
+						timeoutId = $timeout(function() {
+							updateTime(); // update DOM
+							scheduleUpdate(); // schedule the next update
+						}, 1000);
+					};
+					
+					// 这个事件什么时候会被处罚？
+					element.on('$destroy', function() {
+						console.info('here--------');
+						$timeout.cancel(timeoutId);
+					});
+					
+					// start the UI update process.
+					scheduleUpdate();
+				}
+				return {
+					link: link
+				};
+			}]);
+			// 像module.controller函数中一样, module.directive函数的参数也是通过依赖注入获得的， 因此，我们可以在link函数内部使用$timeout 和dateFilter 服务。
+			//AngularJS会触发一些特定的事件，当一个被angular编译过的DOM元素被移除的时候， 它会触发一个$destroy 事件，同样的，当一个angular作用域被移除的时候， 它会向下广播$destroy 事件到所有下级作用域。
+			//通过监听事件，你可以移除可能引起内存泄露的事件监听器， 注册在元素和作用域上的监听器在它们被移除的时候，会自动会清理掉， 但是假如注册一个事件在服务或者没有被删除的DOM节点上，你就必须手工清理，否则会有内存泄露的风险。
+			
+			//最佳实践: 指令应该自己管理自身分配的内存。当指令被移除时， 你可以使用element.on('$destroy', ...) 或 scope.$on('$destroy', ...)来执行一个清理的工作。
+		</script>
+	</body>
+
+</html>

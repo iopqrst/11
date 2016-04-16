@@ -1,0 +1,46 @@
+<!doctype html>
+<html ng-app="app">
+
+	<head>
+		<title>directive</title>
+		<script src="../bower_components/angular/angular.js"></script>
+		<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
+	</head>
+
+	<body>
+
+		<div ng-controller="MyController">
+			<my-dialog ng-hide="dialogIsHidden" on-my-close="hideDialog()">
+				Check out the contents, {{name}}!
+			</my-dialog>
+		</div>
+
+		<script>
+			var app = angular.module("app", []);
+			
+			app.controller('MyController', ['$scope','$timeout', function($scope,$timeout) {
+				
+				$scope.name = 'Tobias';
+				$scope.hideDialog = function() {
+					$scope.dialogIsHidden = true;
+					
+					$timeout(function() {
+						$scope.dialogIsHidden = false;
+					}, 20000);
+				};
+			}]);
+
+			app.directive("myDialog", function() {
+				return {
+					restrict: 'E',
+					transclude: true,
+					scope: {
+						'close': '&onMyClose'
+					},
+					templateUrl: 'directive-08-tpl2.html'
+				};
+			});
+		</script>
+	</body>
+
+</html>
