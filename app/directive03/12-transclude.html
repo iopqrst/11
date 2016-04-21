@@ -1,0 +1,77 @@
+<!doctype html>
+<html ng-app="app">
+
+	<head>
+		<title>directive dialog</title>
+		<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<style type="text/css">
+			.dialog {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				margin-left: -150px;
+				margin-top: -100px;
+				width: 300px;
+				height: 200px;
+				border: 1px solid green;
+			}
+			
+			.dialog h3 {
+				background: #F5E79E;
+				height: 30px;
+				line-height: 30px;
+				margin: 0;
+			}
+			
+			.dialog .body {
+				height: 80px;
+			}
+			
+			.dialog .footer {
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div ng-controller="DialogController">
+			<button ng-click="show=true">show</button>
+
+			<dialog title="Hello title." visible="show" on-cancel="show = false" on-ok="show = false; doSomething()">
+				Body goes here: {{username}} is {{title}}.
+			</dialog>
+		</div>
+
+		<script>
+			var app = angular.module('app', []);
+			
+			app.controller('DialogController', ['$scope', function($scope){ 
+				$scope.username = 'zhangsan';
+				$scope.title = " boy ";
+				
+				$scope.doSomething = function(){
+					
+					alert('打倒日本帝国主义');
+					
+				};
+			}]);
+			
+			app.directive('dialog', function() {
+				return {
+					transclude: true,
+					scope: {
+						title: '@', // the title uses the data-binding from the parent scope
+						onOk: '&', // create a delegate onOk function
+						onCancel: '&', // create a delegate onCancel function
+						visible: '=' // set up visible to accept data-binding
+					},
+					templateUrl: '12-tpl.html',
+					restrict: 'E',
+					replace: true
+				};
+			});
+		</script>
+	</body>
+
+</html>
