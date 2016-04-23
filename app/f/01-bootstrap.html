@@ -13,10 +13,7 @@
 
 	<body>
 		<div ng-controller="BoxCtrl" style="border: 1px solid green; width: 200px;">
-			<div style="width: 100px; height: 100px; background-color: red;" ng-click="click()"></div>
-			<p>{{ w }} x {{ h }}</p>
-			<p>W: <input type="text" ng-model="w" /></p>
-			<p>H: <input type="text" ng-model="h" /></p>
+			content!
 		</div>
 
 		<script type="text/javascript" charset="utf-8">
@@ -26,8 +23,7 @@
 			var app = angular.module('com.study', []);
 			app.controller('BoxCtrl', ['$scope', function($scope) {
 				console.info ('here --- ');
-				$scope.w = 100;
-				$scope.h = 100;
+				alert('enter');
 			}]);
 			
 			angular.bootstrap(document, ['com.study']);
