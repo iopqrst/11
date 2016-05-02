@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="Demo">
+
+	<head>
+		<meta charset="utf-8" />
+		<title>$location</title>
+	</head>
+
+	<body>
+
+		<div ng-controller="FirstController">
+
+		</div>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<script src="/learn-angular/app/bower_components/angular-route/angular-route.js"></script>
+		<script src="/learn-angular/app/bower_components/jquery/dist/jquery.min.js"></script>
+
+		<script type="text/javascript">
+			var app = angular.module('Demo', [], angular.noop);
+			// 记得设置
+			app.config(function($locationProvider) {
+				$locationProvider.html5Mode(false);
+				$locationProvider.hashPrefix('!');
+			});
+			
+			var initUrl = 'http://127.0.0.1:8020/learn-angular/app/f/10-$location.html';
+			
+			app.controller('FirstController', ['$location', function($location) {
+				// 打开http://127.0.0.1:8020/learn-angular/app/f/10-$location.html#!/a
+				console.info($location.absUrl() == initUrl + '#!/a');
+				console.info($location.path() == '/a');
+				$location.path('/foo');
+				
+				$location.absUrl() == initUrl + '#!/foo';
+				$location.search() == {};
+				
+				$location.search({
+					a: 'b',
+					c: true,
+//					name:'params'  //参数
+				});
+				
+				console.info ( $location.absUrl() == initUrl + '#!/foo?a=b&c' );
+				$location.path('/new').search('x=y');
+				console.info ( $location.absUrl() == initUrl + '#!/new?x=y' );
+			}]);
+		</script>
+	</body>
+
+</html>
