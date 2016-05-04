@@ -2,6 +2,30 @@
 <html ng-app>
 
 	<head>
+		
+	</head>
+
+	<body>
+		<div ng-non-bindable class="html5-hashbang-example">
+			<div id="html5-mode" ng-controller="Html5Cntl">
+				<h4 id="hashbang和html5模式_source_带有历史api的浏览器">带有历史API的浏览器</h4>
+				<div ng-address-bar browser="html5"></div><br><br> $location.protocol() = <br> $location.host() = <br> $location.port() = <br> $location.path() = <br> $location.search() = <br> $location.hash() = <br>
+				<a href="http://www.example.com/base/first?a=b">/base/first?a=b</a> |
+				<a href="http://www.example.com/base/sec/ond?flag#hash">sec/ond?flag#hash</a> |
+				<a href="/other-base/another?search">外部链接</a>
+			</div>
+
+			<div id="hashbang-mode" ng-controller="HashbangCntl">
+				<h4 id="hashbang和html5模式_source_没有历史api的浏览器">没有历史API的浏览器</h4>
+				<div ng-address-bar browser="hashbang"></div><br><br> $location.protocol() = <br> $location.host() = <br> $location.port() = <br> $location.path() = <br> $location.search() = <br> $location.hash() = <br>
+				<a href="http://www.example.com/base/first?a=b">/base/first?a=b</a> |
+				<a href="http://www.example.com/base/sec/ond?flag#hash">sec/ond?flag#hash</a> |
+				<a href="/other-base/another?search">外部链接</a>
+			</div>
+		</div>
+		
+		
+		
 		<script src="http://code.angularjs.org/1.2.25/angular.min.js"></script>
 		<script>
 			function FakeBrowser(initUrl, baseHref) {
@@ -73,26 +97,6 @@
 			initEnv('html5');
 			initEnv('hashbang');
 		</script>
-	</head>
-
-	<body>
-		<div ng-non-bindable class="html5-hashbang-example">
-			<div id="html5-mode" ng-controller="Html5Cntl">
-				<h4 id="hashbang和html5模式_source_带有历史api的浏览器">带有历史API的浏览器</h4>
-				<div ng-address-bar browser="html5"></div><br><br> $location.protocol() = <br> $location.host() = <br> $location.port() = <br> $location.path() = <br> $location.search() = <br> $location.hash() = <br>
-				<a href="http://www.example.com/base/first?a=b">/base/first?a=b</a> |
-				<a href="http://www.example.com/base/sec/ond?flag#hash">sec/ond?flag#hash</a> |
-				<a href="/other-base/another?search">外部链接</a>
-			</div>
-
-			<div id="hashbang-mode" ng-controller="HashbangCntl">
-				<h4 id="hashbang和html5模式_source_没有历史api的浏览器">没有历史API的浏览器</h4>
-				<div ng-address-bar browser="hashbang"></div><br><br> $location.protocol() = <br> $location.host() = <br> $location.port() = <br> $location.path() = <br> $location.search() = <br> $location.hash() = <br>
-				<a href="http://www.example.com/base/first?a=b">/base/first?a=b</a> |
-				<a href="http://www.example.com/base/sec/ond?flag#hash">sec/ond?flag#hash</a> |
-				<a href="/other-base/another?search">外部链接</a>
-			</div>
-		</div>
 	</body>
 
 </html>
