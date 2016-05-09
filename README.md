@@ -4,7 +4,7 @@
 
 ## Application Directory Layout
 ```
-    app/                --> all of the files to be used in production
+    app/phone/                --> all of the files to be used in production
       css/              --> css files
         app.css         --> default stylesheet
       img/              --> image files
