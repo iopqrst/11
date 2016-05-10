@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="Demo">
+
+	<head>
+		<meta charset="utf-8" />
+		<title>service 共享数据实例 </title>
+	</head>
+
+	<body>
+		
+		<div ng-controller="MainCtrl">
+			MainCtrl:
+			<input type="text" ng-model="user.name">
+		</div>
+
+		<div ng-controller="SecondCtrl">
+			SecondCtrl:
+			<input type="text" ng-model="user.name">
+		</div>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<script src="./11-service.js"></script>
+		<script type="text/javascript">
+			var app = angular.module('Demo', [], angular.noop);
+			
+			app.controller('MainCtrl', ['$scope', 'UserManager', function($scope, UserManager) {
+				$scope.user = UserManager;
+			}]);
+			
+			app.controller('SecondCtrl', ['$scope', 'UserManager', function($scope, UserManager) {
+				$scope.user = UserManager;
+			}]);
+			
+			app.factory('UserManager', function() {
+				var user = {
+					name : 'angular js ~'
+				};
+				
+				return user;
+			});
+		</script>
+	</body>
+
+</html>

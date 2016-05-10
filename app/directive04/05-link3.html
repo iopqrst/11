@@ -1,0 +1,51 @@
+<!doctype html>
+<html ng-app="app">
+
+	<head>
+		<title>directive</title>
+		<style type="text/css">
+
+		</style>
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+	</head>
+
+	<body>
+
+		<div ng-controller="MyController" id="s_box">
+			What's your name?:
+
+			<input type="text" focus ng-model="user.name" />
+
+			<button ng-click="greet()">Click here!</button>
+
+			<h3>{{ message }}</h3>
+
+		</div>
+
+		<script>
+			var app = angular.module('app', []);
+			app.controller('MyController', ['$scope', function($scope) {
+				
+				$scope.user = {};
+				
+				$scope.user.name = 'monkey';
+				
+				$scope.message = 'Hello ' + $scope.user.name;
+				
+				$scope.greet = function() {
+					alert ('Hello ' + $scope.user.name);
+				}
+			}]);
+			
+			app.directive('focus', function() {
+				return {
+					link: function(scope, element, attrs, controller) {
+						console.info (' enter directive of focus ... ');
+						element[0].focus();
+					}
+				};
+			});
+		</script>
+	</body>
+
+</html>
