@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Angularjs Controller 间通信机制</title>
+	</head>
+
+	<body>
+
+		<div ng-app="app" ng-controller="parentCtr">
+			<div ng-controller="childCtr1">name :
+				<input ng-model="name" type="text" ng-change="change(name);" />
+			</div>
+			<div ng-controller="childCtr2">Ctr1 name:
+				<input ng-model="ctr1Name" />
+			</div>
+		</div>
+
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<script type="text/javascript">
+			var app = angular.module("app", []);
+			
+			// Angularjs在scope中为我们提供了冒泡和隧道机制，
+			// $broadcast会把事件广播给所有子controller，
+			// 而$emit则会将事件冒泡传递给父controller，
+			// $on则是angularjs的事件注册函数，
+			// 有了这一些我们就能很快的以angularjs的方式去解决angularjs controller之间的通信
+			app.controller("parentCtr", function($scope) {
+				$scope.$on("Ctr1NameChange", function(event, msg) {
+					console.log("parent", msg);
+					$scope.$broadcast("Ctr1NameChangeFromParrent", msg);
+				});
+			});
+			app.controller("childCtr1", function($scope) {
+				$scope.change = function(name) {
+					console.log("childCtr1", name);
+					$scope.$emit("Ctr1NameChange", name);
+				};
+			});
+			app.controller("childCtr2", function($scope) {
+				$scope.$on("Ctr1NameChangeFromParrent",
+					function(event, msg) {
+						console.log("childCtr2", msg);
+						$scope.ctr1Name = msg;
+					});
+			});
+		</script>
+	</body>
+
+</html>

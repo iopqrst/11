@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Angularjs Controller 间通信机制</title>
+	</head>
+
+	<body>
+
+		<div ng-controller="ParentController">
+			Parent's name :
+			<input type="text" ng-model="parentName" ng-change="changer(parentName)" />
+
+			<div ng-controller="ChildController1">
+				Ctrl1 name :
+				<input ng-model="ctr1Name" type="text" />
+			</div>
+			<div ng-controller="ChildController2">
+				Ctrl2 name:
+				<input ng-model="ctr2Name" type="text" />
+			</div>
+		</div>
+
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<script type="text/javascript">
+			var app = angular.module("app", []);
+
+			// $broadcast会把事件广播给所有子controller
+			app.controller("ParentController", ['$scope', function($scope) {
+				$scope.changer = function(name) {
+					console.info(' enter parent 1 ');
+					$scope.$broadcast("Ctr1NameChangeFromParrent", name);
+				};
+			}]);
+			
+			app.controller("ChildController1", ['$scope', function($scope) {
+				$scope.$on("Ctr1NameChangeFromParrent",
+					function(event, msg) {
+						$scope.ctr1Name = 'child ctrl1 ' + msg;
+					});
+			}]);
+			
+			app.controller("ChildController2", ['$scope', function($scope) {
+				$scope.$on("Ctr1NameChangeFromParrent",
+					function(event, msg) {
+						$scope.ctr2Name = 'child ctrl2 ' + msg;
+					});
+			}]);
+		</script>
+	</body>
+
+</html>

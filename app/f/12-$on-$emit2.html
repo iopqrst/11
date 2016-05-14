@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Angularjs Controller 间通信机制1</title>
+	</head>
+
+	<body>
+
+		<div ng-controller="ParentController">
+			Parent's name :
+			<input type="text" ng-model="parentName" />
+
+			<div ng-controller="ChildController1">
+				Ctrl1 name :
+				<input ng-model="ctr1Name" type="text" />
+				<input type="button" value="$emit ParentMethod1" ng-click="emitParentMethod1(ctr1Name)" />
+				<input type="button" value="$emit Child2Method1" ng-click="emitChild2Method1(ctr1Name)" />
+			</div>
+			<div ng-controller="ChildController2">
+				Ctrl2 name:
+				<input ng-model="ctr2Name" type="text" />
+			</div>
+		</div>
+
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<script type="text/javascript">
+			var app = angular.module("app", []);
+			
+			// $emit会将事件冒泡传递给父controller
+			app.controller('ParentController', ['$scope', function($scope) {
+				$scope.$on('ParentMethod1', function(event, msg){
+					console.info (event);
+					$scope.parentName = msg;
+
+					// 
+					$scope.ctr2Name = msg;
+				});
+			}]);
+			
+			app.controller('ChildController1', ['$scope', function($scope) {
+				$scope.emitParentMethod1 = function(msg){
+					$scope.$emit('ParentMethod1', msg);
+				}
+				
+				// $emit会将事件冒泡传递给父controller, 同级的controller emit是无法调用到的
+				$scope.emitChild2Method1 = function(){
+					$scope.$emit('Child2Method');
+				}
+			}]);
+			
+			app.controller('ChildController2', ['$scope', function($scope) {
+				$scope.$on('Child2Method', function(event, msg){
+					console.info (event);
+				});
+			}]);
+		</script>
+	</body>
+
+</html>

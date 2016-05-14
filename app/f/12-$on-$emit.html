@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Angularjs Controller 间通信机制1</title>
+	</head>
+
+	<body>
+
+		<div ng-app="app" ng-controller="FirstController">
+			<input type="button" value="$emit事件" ng-click="change()"/>
+		</div>
+
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<script type="text/javascript">
+			var app = angular.module("app", []);
+			
+			
+			app.controller("FirstController", function($scope) {
+				$scope.$on("method1", function(event, data) {
+					console.info ( 'method1 ', data);
+				});
+				
+				$scope.$on("method2", function(event, data) {
+					console.info ( 'method2 = ' + data);
+				});
+				
+				$scope.change = function(){
+					console.info ( 'enter change fn ' + (Date.now()));
+					
+					$scope.$emit('method1', {'name': 'zhangsan',age: 14});
+					
+					$scope.$emit('method2', '这是第二个方法');
+				};
+			});
+		</script>
+	</body>
+
+</html>
