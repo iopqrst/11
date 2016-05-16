@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+	<head>
+		<title> scope </title>
+
+		<style type="text/css">
+			.show-scope-demo > .ng-scope {
+				border: 1px solid red;
+				margin: 3px;
+			}
+			
+			
+			.ctrl2 .ng-scope {
+				border: 1px solid green;
+				margin: 5px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="show-scope-demo">
+			<div ng-controller="GreetCtrl" class="ctrl1">
+				Hello !
+			</div>
+			<div ng-controller="ListCtrl" class="ctrl2">
+				<ol>
+					<li ng-repeat="name in names"> from </li>
+				</ol>
+			</div>
+		</div>
+
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<script type="text/javascript">
+			var app = angular.module('app', []);
+			
+			app.controller('GreetCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
+				$scope.name = 'World';
+				$rootScope.department = 'Angular';
+			}]);
+			app.controller('ListCtrl', ['$scope', function($scope) {
+				$scope.names = ['Igor', 'Misko', 'Vojta'];
+			}]);
+		</script>
+	</body>
+
+</html>
