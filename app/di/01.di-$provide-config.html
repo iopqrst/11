@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="com.study">
+
+	<head>
+		<meta charset="utf-8" />
+
+		<title>ng - 依赖注入</title>
+
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+
+	</head>
+
+	<body>
+
+		<script>
+			var app = angular.module('com.study', []);
+			
+			app.provider('greeting', function() {
+				var text = 'Hello, ';
+				this.setText = function(value) {
+					text = value;
+				};
+				this.$get = function() {
+					return function(name) {
+						alert(text + name);
+					};
+				};
+			});
+			
+			app.config(function(greetingProvider) {
+				greetingProvider.setText("Howdy there, ");
+			});
+			
+			app.run(function(greeting){
+				greeting('Ford Perfect');
+			});
+		</script>
+	</body>
+
+</html>
