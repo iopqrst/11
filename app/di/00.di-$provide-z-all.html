@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="com.study">
+
+	<head>
+		<meta charset="utf-8" />
+
+		<title>ng - 依赖注入</title>
+
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+
+	</head>
+
+	<body>
+		<div ng-controller="MainController">
+			<input type="button" value="Main Controller" ng-click="onClick()" />
+		</div>
+		<script>
+			// 以下代码所做的事情与前三个页面相同
+			var app = angular.module('com.study', []);
+			
+			app.provider('greeting', function() {
+				this.$get = function() {
+					return function(name) {
+						alert("Hello, " + name);
+					};
+				};
+			});
+			
+			app.factory('greeting', function() {
+				return function(name) {
+					alert("Hello, " + name);
+				};
+			});
+			
+			app.value('greeting', function(name) {
+				alert("Hello, " + name);
+			});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="com.study">
+
+	<head>
+		<meta charset="utf-8" />
+
+		<title>ng - 依赖注入</title>
+
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+
+	</head>
+
+	<body>
+		<div ng-controller="MainController">
+			<input type="button" value="Main Controller" ng-click="onClick()" />
+		</div>
+		
+		<script>
+			var app = angular.module('com.study', []);
+			app.config(function($provide) {
+				// AngularJS实际上是在调用前面出现的代码（就是$provide.provider的版本）
+				$provide.factory('greeting', function() {
+					return function(name) {
+						alert('Hello ' + name);
+					}
+				});
+			});
+			
+			app.controller('MainController', ['$scope', 'greeting', function(scope, greeting) {
+				scope.onClick = function() {
+					greeting('Ford Prefect');
+				};
+			}]);
+		</script>
+	</body>
+
+</html>
