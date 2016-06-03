@@ -172,6 +172,9 @@
 					}
 				}
 			});
+			
+			// 在config阶段，只有provider能被注入（只有两个例外是$provide和$injector)
+			// 传入的provider 为自定义的providerName + Provider
 			app.config(function(myProviderProvider) {
 				//Providers are the only service you can pass into app.config
 				myProviderProvider.thingFromConfig = 'This sentence was set in app.config. Providers are the only service that can be passed into config. Check out the code to see how it works';

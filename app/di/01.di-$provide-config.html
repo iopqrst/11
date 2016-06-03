@@ -15,7 +15,7 @@
 		<script>
 			var app = angular.module('com.study', []);
 			
-			app.provider('greeting', function() {
+			app.provider('greeting2', function() {
 				var text = 'Hello, ';
 				this.setText = function(value) {
 					text = value;
@@ -27,13 +27,13 @@
 				};
 			});
 			
-			app.config(function(greetingProvider) {
-				greetingProvider.setText("Howdy there, ");
+			app.config(function(greeting2Provider) {
+				greeting2Provider.setText("Howdy there, ");
 			});
 			
-			app.run(function(greeting){
+			app.run(['greeting2', function(greeting){
 				greeting('Ford Perfect');
-			});
+			}]);
 		</script>
 	</body>
 
