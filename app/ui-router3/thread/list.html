@@ -1,0 +1,8 @@
+<div>
+	<h2>这里是文章列表！ </h2>
+	<ul>
+		<li ng-repeat="thread in vm.threads">
+			{{thread.title}}  -- 作者 : {{thread.author}} -- <a href="" ui-sref="thread.show({id:thread.id})">点击查看详情</a>
+		</li>
+	</ul>
+</div>
