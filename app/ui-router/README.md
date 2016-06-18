@@ -1,0 +1,1 @@
+参考文章地址：http://www.oschina.net/translate/angularjs-ui-router-nested-routes

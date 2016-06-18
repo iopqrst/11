@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="com.study">
+
+	<head>
+		<meta charset="utf-8" />
+
+		<title>如何使用vm</title>
+
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<script src="/learn-angular/app/bower_components/jquery/dist/jquery.min.js"></script>
+
+	</head>
+
+	<body>
+
+		<div ng-controller="MyController as vm">
+			<span>{{vm.message}}</span>
+			<button ng-click="vm.onClick()">Click Me</button>
+		</div>
+
+		<script>
+			var app = angular.module('com.study', []);
+
+			function MyController() {
+				var ctl = this;
+				ctl.message = 'You have not clicked anything yet.';
+				ctl.onClick = function() {
+					ctl.message = 'You clicked something.' + Date.now();
+				};
+				return ctl;
+			}
+
+			app.controller('MyController', MyController);
+		</script>
+	</body>
+
+</html>

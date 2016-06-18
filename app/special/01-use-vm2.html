@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html ng-app="com.study">
+
+	<head>
+		<meta charset="utf-8" />
+
+		<title>如何使用vm</title>
+
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<script src="/learn-angular/app/bower_components/jquery/dist/jquery.min.js"></script>
+
+	</head>
+
+	<body>
+
+		<div ng-controller="UserController as vm">
+			{{vm.title}}
+			
+			<ul>
+				<li ng-repeat="user in vm.users">
+					{{user.name}} --- {{user.age}}
+				</li>
+			</ul>
+		</div>
+
+		<script>
+			var app = angular.module('com.study', []);
+			
+			app.controller('UserController', [function() {
+				var vm2 = this;
+
+				vm2.title = 'test vm2';
+
+				vm2.users = [{
+					"name": "name1",
+					"age": 28
+				}, {
+					"name": "name2",
+					"age": 29
+				}, {
+					"name": "name3",
+					"age": 22
+				}, {
+					"name": "name4",
+					"age": 24
+				}, {
+					"name": "name5",
+					"age": 21
+				}];
+				
+				// 返回 不返回 vm2 有什么区别 ? 至少我在页面展现效果上没有看出有什么区别
+				return vm2;
+				
+			}]);
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="com.study">
+
+	<head>
+		<meta charset="utf-8" />
+
+		<title>如何使用vm</title>
+
+		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
+		<script src="/learn-angular/app/bower_components/jquery/dist/jquery.min.js"></script>
+
+	</head>
+
+	<body>
+
+		<div ng-controller="UserController">
+			{{title}}
+			
+			<ul>
+				<li ng-repeat="user in users">
+					{{user.name}} --- {{user.age}}
+				</li>
+			</ul>
+		</div>
+
+		<script>
+			var app = angular.module('com.study', []);
+
+			app.controller('UserController', ['$scope', function($scope) {
+
+				$scope.title = 'test vm2';
+
+				$scope.users = [{
+					"name": "name1",
+					"age": 28
+				}, {
+					"name": "name2",
+					"age": 29
+				}, {
+					"name": "name3",
+					"age": 22
+				}, {
+					"name": "name4",
+					"age": 24
+				}, {
+					"name": "name5",
+					"age": 21
+				}];
+			}]);
+		</script>
+	</body>
+
+</html>
