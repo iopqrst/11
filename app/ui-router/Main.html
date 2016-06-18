@@ -7,6 +7,31 @@
 		<script src="/learn-angular/app/bower_components/angular/angular.js"></script>
 		<script src="/learn-angular/app/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 		<script src="app.js"></script>
+		<style>
+			.tab-container span {
+				display: inline-block;
+				width: 100px;
+				height:30px;
+				line-height: 30px;
+				border:1px solid green;
+				border-radius: 5px;
+				text-align: center;
+				vertical-align: middle;
+				color:#000000;
+			}
+			
+			.tab-container a {
+				text-decoration: none;
+			}
+			.active {
+				background: #00B7FF;
+			}
+			
+			span.active a {
+				color:#fff;
+				font-weight: bolder;
+			}
+		</style>
 	</head>
 
 	<body data-ng-app="myApp">
