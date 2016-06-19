@@ -1,8 +1,23 @@
 <div>
-	<h2>这里是文章列表！ </h2>
-	<ul>
-		<li ng-repeat="thread in vm.threads">
-			{{thread.title}}  -- 作者 : {{thread.author}} -- <a href="" ui-sref="thread.show({id:thread.id})">点击查看详情</a>
-		</li>
-	</ul>
+	<label for="_keyworkd">过滤条件：</label>
+	<input type="text" id="_keyworkd" placeholder="请输入文章标题、作者、或者发布时间" ng-model="vm.filter.$"/>
 </div>
+
+<table class="table table-hover table-striped">
+	<thead>
+		<tr>
+			<th>主题</th>
+			<th>作者</th>
+			<th>发布时间</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="thread in vm.threads | filter:vm.filter">
+			<td>{{thread.title}}</td>
+			<td>{{thread.author}} </td>
+			<td>{{thread.publishDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+			<td><a href="" ui-sref="thread.show({id:thread.id, param1:'test1', param2:'test2'})">点击查看详情</a></td>
+		</tr>
+	</tbody>
+</table>

@@ -16,6 +16,15 @@
 		<input id="_retypedPassword" bf-field-error="{same: '确认密码必须和密码完全相同'}" type="password" ng-required="true" ng-model="vm.retypedPassword" bf-assert-same-as="vm.form.password" />
 	</div>
 	<div>
-		<button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">立即注册</button>
+		<label for="_captcha">图形验证码</label>
+		<input id="_captcha" type="text" bf-field-error ng-required="true" ng-model="vm.form.captcha" />
+		<img bf-captcha alt="图形验证码" />
 	</div>
+	<div>
+		<input id="_accepted" type="checkbox" ng-model="vm.accepted" bf-assert-same-as="true" />
+		<label for="_accepted">我已阅读并同意<a href>《网站服务协议》</a>
+	</label>
+		<div>
+			<button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">立即注册</button>
+		</div>
 </form>
